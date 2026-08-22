@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HEZHA — Luxury Handmade Crochet</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,600&family=Noto+Kufi+Arabic:wght@500;700;800&family=Playfair+Display:ital,wght@1,600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- فایلی ستایل و دیزاین -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- کتێبخانەی فەرمیی Firebase بۆ سەلماندن و کۆدی ڕاستەقینە -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+  <!-- Top Strip -->
+  <div class="top-strip">
+    <span>🌐 Kur | Eng</span>
+    <span>♡ Handmade with love · HEZHA</span>
+    <span>✨ کرۆشێیا تایبەت</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-logo" onclick="switchNav('home')">
+      <span>HEZHA</span>
+      <svg class="bow-icon" viewBox="0 0 24 24">
+        <path d="M12 13C12.8 13 13.5 12.3 13.5 11.5C13.5 10.7 12.8 10 12 10C11.2 10 10.5 10.7 10.5 11.5C10.5 12.3 11.2 13 12 13Z"/>
+        <path d="M10.5 11.5C8 9 3 8 3 11C3 13.5 7 13 10.5 12"/>
+        <path d="M13.5 11.5C16 9 21 8 21 11C21 13.5 17 13 13.5 12"/>
+        <path d="M11 13L9 21L12 18L15 21L13 13"/>
+      </svg>
+    </div>
+
+    <div class="head-icons">
+      <div class="icon-btn" onclick="switchNav('search')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+
+      <div class="icon-btn" onclick="switchNav('wishlist')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span class="badge-dot">3</span>
+      </div>
+
+      <div class="icon-btn" onclick="switchNav('cart')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="badge-dot" id="topBagCount">2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. HOME TAB -->
+  <main id="tab-home" class="tab-view active-tab">
+    <section class="hero-mobile">
+      <div class="hero-overlay"></div>
+      <div class="hero-glass-card">
+        <div class="tag-ribbon"><span>CROCHETED WITH LOVE</span></div>
+        <h1 class="hero-title">HEZHA</h1>
+        <div class="hero-sub">Little things. Big feelings. ♡</div>
+        
+        <div class="hero-kurdish">
+          هندەک تشت دهێنە چێکرن...<br>
+          هندەک تشت دهێنە هەستپێکرن. ♡
+        </div>
+
+        <div class="hero-btn-row">
+          <button class="btn-pink" onclick="switchNav('shop')">Shop Now ♡ →</button>
+          <button class="btn-white" onclick="switchNav('custom')">Make It Personal ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Badges -->
+    <div class="features-scroll">
+      <div class="feat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        گەهاندنا لەز
+      </div>
+      <div class="feat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+        پێچانا دیاریێ
+      </div>
+      <div class="feat-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        ب کوالێتییا بلند
+      </div>
+    </div>
+
+    <!-- Collections -->
+    <div class="sec-block">
+      <div class="sec-header">
+        <h3 class="sec-title">کۆمەلێن مە ♡</h3>
+        <span class="sec-tag" onclick="switchNav('shop')">هەمییان ببینە →</span>
+      </div>
+
+      <div class="cards-scroll-wrap">
+        <div class="col-card-m" onclick="switchNav('shop')">
+          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
+          <h4>گولستان</h4>
+          <p>گولێن کرۆشێ</p>
+        </div>
+        <div class="col-card-m" onclick="switchNav('shop')">
+          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
+          <h4>یاریکێن نازدار</h4>
+          <p>ورچکێن دەستچن</p>
+        </div>
+        <div class="col-card-m" onclick="switchNav('shop')">
+          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80');"></div>
+          <h4>جانتک</h4>
+          <p>جانتکێن کرۆشێ</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bestsellers -->
+    <div class="sec-block">
+      <div class="sec-header">
+        <h3 class="sec-title">Bestsellers ♡</h3>
+        <span class="sec-tag">پترترین داخوازی کری</span>
+      </div>
+
+      <div class="product-grid-m">
+        <div class="prod-card-m">
+          <span class="badge-hot-m">🔥 گەلەک هاتییە فرۆتن</span>
+          <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="prod-title-m">Rosie Bouquet</div>
+          <div class="stars-m">★★★★★ (124)</div>
+          <div class="price-m">$28</div>
+          <button class="btn-buy-m" onclick="quickAdd('Rosie Bouquet', 28)">زێدەکرن بۆ سەبەتێ</button>
+        </div>
+
+        <div class="prod-card-m">
+          <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="prod-title-m">Sweet Bear</div>
+          <div class="stars-m">★★★★★ (98)</div>
+          <div class="price-m">$22</div>
+          <button class="btn-buy-m" onclick="quickAdd('Sweet Bear', 22)">زێدەکرن بۆ سەبەتێ</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 2. SHOP TAB -->
+  <main id="tab-shop" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">هەمی بەرهەمێن دەستچن 🌸</h3>
+      <span class="sec-tag" onclick="switchNav('home')">← سەرەکی</span>
+    </div>
+    <div class="product-grid-m">
+      <div class="prod-card-m">
+        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="prod-title-m">Rosie Bouquet</div>
+        <div class="stars-m">★★★★★ (124)</div>
+        <div class="price-m">$28</div>
+        <button class="btn-buy-m" onclick="quickAdd('Rosie Bouquet', 28)">زێدەکرن بۆ سەبەتێ</button>
+      </div>
+      <div class="prod-card-m">
+        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="prod-title-m">Sweet Bear</div>
+        <div class="stars-m">★★★★★ (98)</div>
+        <div class="price-m">$22</div>
+        <button class="btn-buy-m" onclick="quickAdd('Sweet Bear', 22)">زێدەکرن بۆ سەبەتێ</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 3. SEARCH TAB -->
+  <main id="tab-search" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">لێگەڕیان 🔍</h3>
+    </div>
+    <div class="field-group">
+      <input type="text" placeholder="ناڤێ بەرهەمی بنڤیسە..." oninput="filterSearch(this.value)">
+    </div>
+    <div id="searchBoxResult" style="text-align:center; color:var(--muted); padding:20px;">
+      ل چ بەرهەمەکێ دگەڕیی؟
+    </div>
+  </main>
+
+  <!-- 4. WISHLIST TAB -->
+  <main id="tab-wishlist" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">حەزژێکریێن من ♡</h3>
+    </div>
+    <div class="custom-input-box" style="text-align:center; padding:30px 10px;">
+      <p style="font-size:24px;">🌸</p>
+      <h4 style="font-size:13px; font-weight:700; margin:6px 0;">۳ بەرهەمێن پاراستی هەنە</h4>
+      <button class="btn-pink" style="margin-top:10px;" onclick="switchNav('shop')">کڕینا بەرهەمان</button>
+    </div>
+  </main>
+
+  <!-- 5. CUSTOM STUDIO TAB -->
+  <main id="tab-custom" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">داخوازیا تایبەت ✨</h3>
+    </div>
+    <div class="custom-input-box">
+      <div class="field-group">
+        <label>جۆرێ دەستچنی:</label>
+        <select id="custItem"><option>گولێن Rosie Bouquet</option><option>ورچکێ Sweet Bear</option><option>جانتکێ Luna Bag</option></select>
+      </div>
+      <div class="field-group">
+        <label>نامەیا کارتێ:</label>
+        <textarea id="custMsg" rows="3" placeholder="نامەیەکا جوان بنڤیسە..."></textarea>
+      </div>
+      <button class="btn-pink" style="width:100%;" onclick="orderWhatsAppCustom()">فرێکرن ب WhatsApp 💬</button>
+    </div>
+  </main>
+
+  <!-- 6. CART TAB -->
+  <main id="tab-cart" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">سەبەتا تە 🛍️</h3>
+    </div>
+    <div class="custom-input-box" id="cartContentBox"></div>
+  </main>
+
+  <!-- 7. PROFILE TAB -->
+  <main id="tab-profile" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">پرۆفایل و هەژمار 👤</h3>
+    </div>
+
+    <!-- Active Profile View -->
+    <div id="userLoggedInView" style="display:none;">
+      <div class="custom-input-box" style="text-align:center; padding:18px 12px; margin-bottom:12px;">
+        <div style="width:64px; height:64px; border-radius:50%; background:var(--soft-pink); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🌸</div>
+        <h4 id="dispName" style="font-size:15px; font-weight:800; color:#1A0D10;">ناڤێ کڕیاری</h4>
+        <p id="dispAccountType" style="color:var(--deep-berry); font-size:10.5px; font-weight:700; margin-top:2px;">Gmail / Phone</p>
+        <p style="color:#2E7D32; font-size:10px; font-weight:700; margin-top:3px;">✓ پشتڕاستکرییە (Verified)</p>
+        <p id="dispAddress" style="color:var(--muted); font-size:11px; margin-top:4px;">ناڤونیشان</p>
+      </div>
+
+      <div class="custom-input-box">
+        <h4 style="font-size:12px; font-weight:700; margin-bottom:12px; color:var(--deep-berry);">دەستکاریکرنا ناڤونیشانی</h4>
+        <div class="field-group">
+          <label>باژێڕ و ناڤونیشان:</label>
+          <input type="text" id="editAddress" placeholder="دهۆک، تاخێ...">
+        </div>
+        <button class="btn-pink" style="width:100%; margin-bottom:8px;" onclick="updateSavedAddress()">
+          نویکرنا ناڤونیشانی (Update)
+        </button>
+        <button class="btn-white" style="width:100%;" onclick="logoutUser()">
+          دەرکەفتن ژ هەژمارێ (Logout) 🚪
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 1: Input Details -->
+    <div id="userAuthStep1">
+      <div class="custom-input-box">
+        <h4 style="font-size:13px; font-weight:800; text-align:center; margin-bottom:14px; color:#1A0D10;">
+          دروستکرنا هەژمارێ ✨
+        </h4>
+
+        <div class="auth-toggle-row">
+          <button id="togglePhoneBtn" class="auth-toggle-btn active" onclick="setAuthMode('phone')">
+            ب ژمارا مۆبایلێ 📱
+          </button>
+          <button id="toggleGmailBtn" class="auth-toggle-btn" onclick="setAuthMode('gmail')">
+            ب ناڤونیشانێ Gmail ✉️
+          </button>
+        </div>
+
+        <div class="field-group">
+          <label>ناڤێ تە یێ سیانی:</label>
+          <input type="text" id="regName" placeholder="ناڤێ خۆ بنڤیسە...">
+        </div>
+
+        <div class="field-group" id="phoneInputGroup">
+          <label>ژمارا مۆبایلێ (WhatsApp):</label>
+          <input type="tel" id="regPhone" placeholder="+964750XXXXXXX">
+        </div>
+
+        <div class="field-group" id="gmailInputGroup" style="display:none;">
+          <label>ئیمەیڵ (Gmail):</label>
+          <input type="email" id="regGmail" placeholder="example@gmail.com">
+        </div>
+
+        <div class="field-group">
+          <label>باژێڕ و ناڤونیشان:</label>
+          <input type="text" id="regAddress" placeholder="دهۆک، تاخێ...">
+        </div>
+
+        <!-- Recaptcha Container بۆ فایربەیس -->
+        <div id="recaptcha-container"></div>
+
+        <button class="btn-pink" style="width:100%; margin-top:8px;" onclick="sendVerificationCode()">
+          ناردنا کۆدێ پشتڕاستکرنێ (Send Code) 📩
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Verification PIN View -->
+    <div id="userAuthStep2" style="display:none;">
+      <div class="custom-input-box" style="text-align:center;">
+        <h4 style="font-size:14px; font-weight:800; color:#1A0D10; margin-bottom:4px;">کۆدێ پشتڕاستکرنێ بنڤیسە 🔐</h4>
+        <p id="verifyTargetText" style="color:var(--muted); font-size:11px; margin-bottom:12px;">کۆد بۆ هاتە ڕەوانەکرن</p>
+
+        <div class="pin-input-group">
+          <input type="number" id="pin1" class="pin-digit" maxlength="1" oninput="movePin(this, 'pin2')">
+          <input type="number" id="pin2" class="pin-digit" maxlength="1" oninput="movePin(this, 'pin3')">
+          <input type="number" id="pin3" class="pin-digit" maxlength="1" oninput="movePin(this, 'pin4')">
+          <input type="number" id="pin4" class="pin-digit" maxlength="1">
+        </div>
+
+        <button class="btn-pink" style="width:100%; margin-top:10px;" onclick="verifyAndActivateAccount()">
+          پشتڕاستکرن و دروستکرنا هەژمارێ ✓
+        </button>
+        <button class="btn-white" style="width:100%; margin-top:8px;" onclick="backToStep1()">
+          ← زڤڕین و گوهۆڕینا زانیارییان
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Complete 5-Tabs Bottom Navigation -->
+  <nav class="dock-m">
+    <div class="dock-link active" id="nav-home" onclick="switchNav('home')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      <span>سەرەکی</span>
+    </div>
+
+    <div class="dock-link" id="nav-shop" onclick="switchNav('shop')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+      <span>فرۆشگەهـ</span>
+    </div>
+
+    <div class="dock-link" id="nav-search" onclick="switchNav('search')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <span>لێگەڕیان</span>
+    </div>
+
+    <div class="dock-link" id="nav-wishlist" onclick="switchNav('wishlist')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      <span>حەزژێکری</span>
+    </div>
+
+    <div class="dock-link" id="nav-profile" onclick="switchNav('profile')">
+      <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      <span>پرۆفایل</span>
+    </div>
+  </nav>
+
+  <!-- فایلی کۆنتڕۆڵ و فایربەیس -->
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
