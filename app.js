@@ -8,12 +8,12 @@ let myCart = [
 ];
 
 let myWishlist = [
-  { name: "Cute Medali", price: 15, img: "https://images.unsplash.com/photo-1618354691373-d851cb53a06?auto=format&fit=crop&w=400&q=80" }
+  { name: "Cute Medali", price: 15, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" }
 ];
 
 // هەموو بەرهەمەکانی فرۆشگا بە پۆلەکانیانەوە
 const allProducts = [
-  { name: "Cute Medali", price: 15, cat: "مەدالی", img: "https://images.unsplash.com/photo-1618354691373-d851cb53a06?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (124)" },
+  { name: "Cute Medali", price: 15, cat: "مەدالی", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (124)" },
   { name: "Warm Scarf", price: 25, cat: "ملپێچ", img: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (98)" },
   { name: "Crochet Hat", price: 20, cat: "کلاو", img: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (76)" },
   { name: "Handmade Outfit", price: 45, cat: "جلوبەرگ", img: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (112)" }
