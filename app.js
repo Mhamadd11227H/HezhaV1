@@ -1,15 +1,27 @@
 /* ========================================================
-   HEZHA APPLICATION LOGIC & STORE CONTROLLER
-   تێبینی: لێرەدا دەتوانیت ناوی بەرهەم و سەبەتە بەڕێوەببەیت
+   HEZHA STORE & THEME CONTROLLER
    ======================================================== */
 
-// تێبینی: بەرهەمە سەرەتاییەکانی ناو سەبەتە
 let myCart = [
   { name: "Rosie Bouquet", price: 28 },
   { name: "Sweet Bear", price: 22 }
 ];
 
-// گۆڕینی بەشەکان (Navigation Tabs)
+// مۆدی شەوانە و ڕۆژ
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  document.getElementById('themeEmoji').innerText = isDark ? '☀️' : '🌙';
+  localStorage.setItem('hezha_theme', isDark ? 'dark' : 'light');
+}
+
+// لۆدکردنی ستایلی هەڵبژێردراو لە کاتی کردنەوە
+if (localStorage.getItem('hezha_theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  const emoji = document.getElementById('themeEmoji');
+  if (emoji) emoji.innerText = '☀️';
+}
+
 function switchNav(tab) {
   document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active-tab'));
   const target = document.getElementById('tab-' + tab);
@@ -24,14 +36,12 @@ function switchNav(tab) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// زیادکردن بۆ سەبەتە
 function quickAdd(name, price) {
   myCart.push({ name, price });
   document.getElementById('topBagCount').innerText = myCart.length;
   alert(`بەرهەمێ "${name}" هاتە زێدەکرن بۆ سەبەتێ 🌸`);
 }
 
-// پیشاندانی ناوەڕۆکی سەبەتە
 function renderCart() {
   const box = document.getElementById('cartContentBox');
   if (myCart.length === 0) {
@@ -52,7 +62,6 @@ function renderCart() {
   box.innerHTML = html;
 }
 
-// کڕین و ناردنی داواکاری لە ڕێگەی واتسئاپەوە
 function checkoutWithAccount(total) {
   const stored = localStorage.getItem('hezha_account');
   let name = 'نەدیار', contact = 'نەدیار', address = 'نەدیار';
@@ -65,8 +74,6 @@ function checkoutWithAccount(total) {
   }
 
   const items = myCart.map(i => i.name).join('، ');
-  
-  // تێبینی: دەتوانیت لە خوارەوە لە شوێنی https://wa.me/ ژمارەی مۆبایلی خۆت دابنێیت
   let text = `سڵاڤ HEZHA، داخوازیەکا نوو ژ وێبسایتی:%0A` +
              `👤 کڕیار: ${name}%0A` +
              `📞 پەیوەندی: ${contact}%0A` +
@@ -77,7 +84,6 @@ function checkoutWithAccount(total) {
   window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
-// داواکاری تایبەت (Custom Studio)
 function orderWhatsAppCustom() {
   const item = document.getElementById('custItem').value;
   const msg = document.getElementById('custMsg').value;
@@ -88,7 +94,6 @@ function orderWhatsAppCustom() {
   window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
-// سێرچ و گەڕان
 function filterSearch(q) {
   const res = document.getElementById('searchBoxResult');
   if (!q.trim()) {
@@ -101,6 +106,4 @@ function filterSearch(q) {
   </div>`;
 }
 
-// لۆدکردنی هەژمار لەگەڵ کردنەوەی سایت
 checkAuthStatus();
-
