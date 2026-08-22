@@ -1,10 +1,8 @@
 /* ========================================================
-   HEZHA OFFICIAL STYLESHEET
-   تێبینی: لێرەدا دەتوانیت ڕەنگە سەرەکییەکان بە ئارەزووی خۆت بگۆڕیت
+   HEZHA OFFICIAL STYLESHEET WITH DARK MODE & DELIVERY
    ======================================================== */
 
 :root {
-  /* لێرەدا دەتوانیت کۆدی ڕەنگەکان بگۆڕیت */
   --bg-cream: #FAF2EC;
   --card-bg: #FFFFFF;
   --soft-pink: #F3DDD7;
@@ -14,6 +12,19 @@
   --muted: #6E5A60;
   --border: rgba(184, 93, 111, 0.15);
   --pill-bg: #F4DFD8;
+}
+
+/* Cozy Night Theme */
+body.dark-mode {
+  --bg-cream: #1C1215;
+  --card-bg: #281B20;
+  --soft-pink: #3D262D;
+  --berry: #E58699;
+  --deep-berry: #D47084;
+  --dark-text: #FDEEF0;
+  --muted: #B8A1A6;
+  --border: rgba(229, 134, 153, 0.2);
+  --pill-bg: #2F1E24;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -29,16 +40,17 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .top-strip {
-  background: #F1D9D3;
+  background: var(--soft-pink);
   padding: 6px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 9.5px;
-  color: #52343B;
+  color: var(--dark-text);
   font-weight: 700;
 }
 
@@ -54,6 +66,10 @@ header {
   z-index: 100;
   border-bottom: 1px solid var(--border);
 }
+body.dark-mode header {
+  background: rgba(28, 18, 21, 0.96);
+}
+
 .brand-logo {
   font-family: 'Cormorant Garamond', serif;
   font-size: 24px;
@@ -68,7 +84,7 @@ header {
 }
 .bow-icon { width: 18px; height: 18px; fill: var(--deep-berry); }
 
-.head-icons { display: flex; align-items: center; gap: 14px; }
+.head-icons { display: flex; align-items: center; gap: 12px; }
 .icon-btn {
   display: flex;
   align-items: center;
@@ -101,14 +117,15 @@ header {
 /* Hero Section */
 .hero-mobile {
   position: relative;
-  /* تێبینی: دەتوانیت لینکی وێنەی هێرۆ لێرە بگۆڕیت */
-  background: url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=800&q=85') center/cover no-repeat;
+  background: url('images/hero.jpg') center/cover no-repeat, url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=800&q=85') center/cover no-repeat;
   padding: 24px 14px 28px;
   text-align: center;
   border-radius: 0 0 25px 25px;
   overflow: hidden;
 }
 .hero-overlay { position: absolute; inset: 0; background: rgba(250, 242, 236, 0.25); z-index: 1; }
+body.dark-mode .hero-overlay { background: rgba(28, 18, 21, 0.4); }
+
 .hero-glass-card {
   position: relative;
   z-index: 2;
@@ -119,12 +136,17 @@ header {
   padding: 22px 14px;
   box-shadow: 0 10px 25px rgba(42, 23, 28, 0.12);
 }
+body.dark-mode .hero-glass-card {
+  background: rgba(40, 27, 32, 0.88);
+  border: 1px solid rgba(229, 134, 153, 0.2);
+}
+
 .tag-ribbon {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 9.5px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: #9C3B50;
+  color: var(--berry);
   margin-bottom: 3px;
   font-weight: 700;
 }
@@ -134,14 +156,14 @@ header {
   letter-spacing: 4px;
   line-height: 1;
   margin-bottom: 2px;
-  color: #1A0D10;
+  color: var(--dark-text);
   font-weight: 700;
 }
 .hero-sub {
   font-family: 'Playfair Display', serif;
   font-style: italic;
   font-size: 19px;
-  color: #A34358;
+  color: var(--deep-berry);
   margin-bottom: 12px;
   font-weight: 600;
 }
@@ -150,11 +172,11 @@ header {
   font-weight: 700;
   line-height: 1.8;
   margin-bottom: 18px;
-  color: #210E13;
+  color: var(--dark-text);
 }
 .hero-btn-row { display: flex; gap: 8px; justify-content: center; }
 .btn-pink {
-  background: #B85D6F;
+  background: var(--deep-berry);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -165,15 +187,14 @@ header {
   box-shadow: 0 6px 14px rgba(184, 93, 111, 0.35);
 }
 .btn-white {
-  background: #FFFFFF;
-  border: 1px solid rgba(184, 93, 111, 0.3);
-  color: #210E13;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--dark-text);
   padding: 10px 18px;
   border-radius: 25px;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .features-scroll {
@@ -206,7 +227,7 @@ header {
   align-items: baseline;
   margin-bottom: 12px;
 }
-.sec-title { font-size: 16px; font-weight: 800; color: #1A0D10; }
+.sec-title { font-size: 16px; font-weight: 800; color: var(--dark-text); }
 .sec-tag { font-size: 10px; color: var(--berry); font-weight: 700; cursor: pointer; }
 
 .cards-scroll-wrap {
@@ -218,7 +239,7 @@ header {
 }
 .cards-scroll-wrap::-webkit-scrollbar { display: none; }
 .col-card-m {
-  background: white;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 8px;
   border: 1px solid var(--border);
@@ -234,7 +255,7 @@ header {
   background-position: center;
   margin-bottom: 6px;
 }
-.col-card-m h4 { font-size: 11.5px; font-weight: 700; margin-bottom: 2px; color: #1A0D10; }
+.col-card-m h4 { font-size: 11.5px; font-weight: 700; margin-bottom: 2px; color: var(--dark-text); }
 .col-card-m p { font-size: 8.5px; color: var(--muted); line-height: 1.2; font-weight: 500; }
 
 .product-grid-m {
@@ -243,7 +264,7 @@ header {
   gap: 10px;
 }
 .prod-card-m {
-  background: white;
+  background: var(--card-bg);
   border-radius: 16px;
   padding: 10px;
   border: 1px solid var(--border);
@@ -267,9 +288,9 @@ header {
   background-position: center;
   margin-bottom: 8px;
 }
-.prod-title-m { font-size: 11.5px; font-weight: 700; margin-bottom: 2px; color: #1A0D10; }
+.prod-title-m { font-size: 11.5px; font-weight: 700; margin-bottom: 2px; color: var(--dark-text); }
 .stars-m { font-size: 9px; color: #E29547; margin-bottom: 6px; }
-.price-m { font-size: 13px; font-weight: 800; margin-bottom: 8px; color: #1A0D10; }
+.price-m { font-size: 13px; font-weight: 800; margin-bottom: 8px; color: var(--dark-text); }
 .btn-buy-m {
   width: 100%;
   background: var(--berry);
@@ -282,9 +303,9 @@ header {
   cursor: pointer;
 }
 
-/* Auth & Forms */
+/* Forms & Calculator */
 .custom-input-box {
-  background: white;
+  background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 18px 14px;
@@ -311,12 +332,12 @@ header {
   font-family: inherit;
 }
 .auth-toggle-btn.active {
-  background: white;
+  background: var(--card-bg);
   color: var(--deep-berry);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .field-group { margin-bottom: 12px; }
-.field-group label { display: block; font-weight: 700; font-size: 11px; margin-bottom: 5px; }
+.field-group label { display: block; font-weight: 700; font-size: 11px; margin-bottom: 5px; color: var(--dark-text); }
 .field-group input, .field-group select, .field-group textarea {
   width: 100%;
   padding: 10px 12px;
@@ -325,6 +346,7 @@ header {
   font-family: inherit;
   font-size: 12px;
   background: var(--bg-cream);
+  color: var(--dark-text);
   outline: none;
 }
 
@@ -367,6 +389,10 @@ header {
   z-index: 200;
   padding: 0 6px;
 }
+body.dark-mode .dock-m {
+  background: rgba(40, 27, 32, 0.96);
+}
+
 .dock-link {
   display: flex;
   flex-direction: column;
@@ -378,11 +404,6 @@ header {
   gap: 2px;
   font-weight: 700;
 }
-.dock-link svg {
-  width: 18px;
-  height: 18px;
-  stroke-width: 1.8;
-  stroke: var(--muted);
-}
+.dock-link svg { width: 18px; height: 18px; stroke-width: 1.8; stroke: var(--muted); }
 .dock-link.active { color: var(--deep-berry); font-weight: 800; }
 .dock-link.active svg { stroke: var(--deep-berry); }
