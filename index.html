@@ -5,28 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>HEZHA — Luxury Handmade Crochet</title>
   
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,600&family=Noto+Kufi+Arabic:wght@500;700;800&family=Playfair+Display:ital,wght@1,600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 
-  <!-- فایلی ستایل و دیزاین -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- کتێبخانەی فەرمیی Firebase بۆ سەلماندن و کۆدی ڕاستەقینە -->
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 </head>
 <body>
 
-  <!-- Top Strip -->
   <div class="top-strip">
     <span>🌐 Kur | Eng</span>
     <span>♡ Handmade with love · HEZHA</span>
     <span>✨ کرۆشێیا تایبەت</span>
   </div>
 
-  <!-- Header -->
   <header>
     <div class="brand-logo" onclick="switchNav('home')">
       <span>HEZHA</span>
@@ -39,6 +33,11 @@
     </div>
 
     <div class="head-icons">
+      <!-- Dark Mode Switcher -->
+      <div class="icon-btn" onclick="toggleTheme()" title="شەو / ڕۆژ">
+        <span id="themeEmoji" style="font-size:16px;">🌙</span>
+      </div>
+
       <div class="icon-btn" onclick="switchNav('search')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
@@ -87,9 +86,9 @@
 
     <!-- Badges -->
     <div class="features-scroll">
-      <div class="feat-pill">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-        گەهاندنا لەز
+      <div class="feat-pill" onclick="switchNav('delivery')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        گەهاندنا دهۆکێ 🚚
       </div>
       <div class="feat-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
@@ -110,17 +109,17 @@
 
       <div class="cards-scroll-wrap">
         <div class="col-card-m" onclick="switchNav('shop')">
-          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="col-img-m" style="background-image:url('images/bouquet.jpg'), url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>گولستان</h4>
           <p>گولێن کرۆشێ</p>
         </div>
         <div class="col-card-m" onclick="switchNav('shop')">
-          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="col-img-m" style="background-image:url('images/bear.jpg'), url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>یاریکێن نازدار</h4>
           <p>ورچکێن دەستچن</p>
         </div>
         <div class="col-card-m" onclick="switchNav('shop')">
-          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="col-img-m" style="background-image:url('images/bag.jpg'), url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>جانتک</h4>
           <p>جانتکێن کرۆشێ</p>
         </div>
@@ -137,7 +136,7 @@
       <div class="product-grid-m">
         <div class="prod-card-m">
           <span class="badge-hot-m">🔥 گەلەک هاتییە فرۆتن</span>
-          <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="prod-img-m" style="background-image:url('images/bouquet.jpg'), url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
           <div class="prod-title-m">Rosie Bouquet</div>
           <div class="stars-m">★★★★★ (124)</div>
           <div class="price-m">$28</div>
@@ -145,7 +144,7 @@
         </div>
 
         <div class="prod-card-m">
-          <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="prod-img-m" style="background-image:url('images/bear.jpg'), url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
           <div class="prod-title-m">Sweet Bear</div>
           <div class="stars-m">★★★★★ (98)</div>
           <div class="price-m">$22</div>
@@ -163,18 +162,32 @@
     </div>
     <div class="product-grid-m">
       <div class="prod-card-m">
-        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="prod-img-m" style="background-image:url('images/bouquet.jpg'), url('https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80');"></div>
         <div class="prod-title-m">Rosie Bouquet</div>
         <div class="stars-m">★★★★★ (124)</div>
         <div class="price-m">$28</div>
         <button class="btn-buy-m" onclick="quickAdd('Rosie Bouquet', 28)">زێدەکرن بۆ سەبەتێ</button>
       </div>
       <div class="prod-card-m">
-        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="prod-img-m" style="background-image:url('images/bear.jpg'), url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=400&q=80');"></div>
         <div class="prod-title-m">Sweet Bear</div>
         <div class="stars-m">★★★★★ (98)</div>
         <div class="price-m">$22</div>
         <button class="btn-buy-m" onclick="quickAdd('Sweet Bear', 22)">زێدەکرن بۆ سەبەتێ</button>
+      </div>
+      <div class="prod-card-m">
+        <div class="prod-img-m" style="background-image:url('images/bag.jpg'), url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="prod-title-m">Luna Bag</div>
+        <div class="stars-m">★★★★★ (76)</div>
+        <div class="price-m">$35</div>
+        <button class="btn-buy-m" onclick="quickAdd('Luna Bag', 35)">زێدەکرن بۆ سەبەتێ</button>
+      </div>
+      <div class="prod-card-m">
+        <div class="prod-img-m" style="background-image:url('images/pot.jpg'), url('https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="prod-title-m">Sunny Pot</div>
+        <div class="stars-m">★★★★★ (112)</div>
+        <div class="price-m">$18</div>
+        <button class="btn-buy-m" onclick="quickAdd('Sunny Pot', 18)">زێدەکرن بۆ سەبەتێ</button>
       </div>
     </div>
   </main>
@@ -204,7 +217,35 @@
     </div>
   </main>
 
-  <!-- 5. CUSTOM STUDIO TAB -->
+  <!-- 5. DUHOK DELIVERY CALCULATOR -->
+  <main id="tab-delivery" class="tab-view sec-block">
+    <div class="sec-header" style="margin-top:10px;">
+      <h3 class="sec-title">گەهاندنا دهۆکێ و دەوروبەر 🚚</h3>
+      <span class="sec-tag" onclick="switchNav('home')">← سەرەکی</span>
+    </div>
+    
+    <div class="custom-input-box">
+      <div class="field-group">
+        <label>جهێ گەهاندنێ هەلبژێرە:</label>
+        <select id="deliveryLocation" onchange="calculateDelivery()">
+          <option value="3000">ناڤەندا باژێڕێ دهۆکێ (3,000 دینار - هەمان ڕۆژ)</option>
+          <option value="4000">ماسیکێ / شۆڕش / مالتا (4,000 دینار)</option>
+          <option value="5000">زاخۆ / سێمێل (5,000 دینار)</option>
+          <option value="5000">ئامێدیێ / ئاکرێ (5,000 دینار)</option>
+          <option value="6000">هەولێر / سلێمانی (6,000 دینار - گەهاندنا لەز)</option>
+        </select>
+      </div>
+
+      <div style="background:var(--bg-cream); border-radius:12px; padding:12px; margin-bottom:12px; font-size:11.5px; line-height:1.8;">
+        <p>⏱️ <strong>دەمێ گەهاندنێ:</strong> ۲٤ بۆ ٤٨ دەمژمێر</p>
+        <p>🎁 <strong>پێچان:</strong> پێچانا ب کارت و شریتێ حەریر بێ بەرامبەرە</p>
+      </div>
+
+      <button class="btn-pink" style="width:100%;" onclick="switchNav('shop')">دەستپێکرنا کڕینێ 🛍️</button>
+    </div>
+  </main>
+
+  <!-- 6. CUSTOM STUDIO TAB -->
   <main id="tab-custom" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title">داخوازیا تایبەت ✨</h3>
@@ -222,7 +263,7 @@
     </div>
   </main>
 
-  <!-- 6. CART TAB -->
+  <!-- 7. CART TAB -->
   <main id="tab-cart" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title">سەبەتا تە 🛍️</h3>
@@ -230,7 +271,7 @@
     <div class="custom-input-box" id="cartContentBox"></div>
   </main>
 
-  <!-- 7. PROFILE TAB -->
+  <!-- 8. PROFILE TAB -->
   <main id="tab-profile" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title">پرۆفایل و هەژمار 👤</h3>
@@ -240,7 +281,7 @@
     <div id="userLoggedInView" style="display:none;">
       <div class="custom-input-box" style="text-align:center; padding:18px 12px; margin-bottom:12px;">
         <div style="width:64px; height:64px; border-radius:50%; background:var(--soft-pink); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🌸</div>
-        <h4 id="dispName" style="font-size:15px; font-weight:800; color:#1A0D10;">ناڤێ کڕیاری</h4>
+        <h4 id="dispName" style="font-size:15px; font-weight:800; color:var(--dark-text);">ناڤێ کڕیاری</h4>
         <p id="dispAccountType" style="color:var(--deep-berry); font-size:10.5px; font-weight:700; margin-top:2px;">Gmail / Phone</p>
         <p style="color:#2E7D32; font-size:10px; font-weight:700; margin-top:3px;">✓ پشتڕاستکرییە (Verified)</p>
         <p id="dispAddress" style="color:var(--muted); font-size:11px; margin-top:4px;">ناڤونیشان</p>
@@ -264,7 +305,7 @@
     <!-- Step 1: Input Details -->
     <div id="userAuthStep1">
       <div class="custom-input-box">
-        <h4 style="font-size:13px; font-weight:800; text-align:center; margin-bottom:14px; color:#1A0D10;">
+        <h4 style="font-size:13px; font-weight:800; text-align:center; margin-bottom:14px; color:var(--dark-text);">
           دروستکرنا هەژمارێ ✨
         </h4>
 
@@ -297,7 +338,6 @@
           <input type="text" id="regAddress" placeholder="دهۆک، تاخێ...">
         </div>
 
-        <!-- Recaptcha Container بۆ فایربەیس -->
         <div id="recaptcha-container"></div>
 
         <button class="btn-pink" style="width:100%; margin-top:8px;" onclick="sendVerificationCode()">
@@ -309,7 +349,7 @@
     <!-- Step 2: Verification PIN View -->
     <div id="userAuthStep2" style="display:none;">
       <div class="custom-input-box" style="text-align:center;">
-        <h4 style="font-size:14px; font-weight:800; color:#1A0D10; margin-bottom:4px;">کۆدێ پشتڕاستکرنێ بنڤیسە 🔐</h4>
+        <h4 style="font-size:14px; font-weight:800; color:var(--dark-text); margin-bottom:4px;">کۆدێ پشتڕاستکرنێ بنڤیسە 🔐</h4>
         <p id="verifyTargetText" style="color:var(--muted); font-size:11px; margin-bottom:12px;">کۆد بۆ هاتە ڕەوانەکرن</p>
 
         <div class="pin-input-group">
@@ -357,7 +397,6 @@
     </div>
   </nav>
 
-  <!-- فایلی کۆنتڕۆڵ و فایربەیس -->
   <script src="auth.js"></script>
   <script src="app.js"></script>
 </body>
