@@ -48,7 +48,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
         </svg>
-        <span class="badge-dot">3</span>
+        <span class="badge-dot" id="topWishCount">3</span>
       </div>
 
       <div class="icon-btn" onclick="switchNav('cart')">
@@ -99,30 +99,30 @@
       </div>
     </div>
 
-    <!-- Collections (بەشەکان بە وێنەی سەرنجڕاکێشی جیهانی) -->
+    <!-- Collections (بەشەکان بە فیلتەری ڕاستەقینە) -->
     <div class="sec-block">
       <div class="sec-header">
         <h3 class="sec-title">بەشێن ئیشێن دەستچن ♡</h3>
-        <span class="sec-tag" onclick="switchNav('shop')">هەمییان ببینە →</span>
+        <span class="sec-tag" onclick="filterByCategory('all')">هەمییان ببینە →</span>
       </div>
 
       <div class="cards-scroll-wrap">
-        <div class="col-card-m" onclick="switchNav('shop')">
-          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80');"></div>
+        <div class="col-card-m" onclick="filterByCategory('مەدالی')">
+          <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>مەدالی</h4>
           <p>مەدالیێن نازدار</p>
         </div>
-        <div class="col-card-m" onclick="switchNav('shop')">
+        <div class="col-card-m" onclick="filterByCategory('ملپێچ')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>ملپێچ</h4>
           <p>ملپێچێن گەرم</p>
         </div>
-        <div class="col-card-m" onclick="switchNav('shop')">
+        <div class="col-card-m" onclick="filterByCategory('کلاو')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>کلاو</h4>
           <p>کلاوێن کرۆشێ</p>
         </div>
-        <div class="col-card-m" onclick="switchNav('shop')">
+        <div class="col-card-m" onclick="filterByCategory('جلوبەرگ')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80');"></div>
           <h4>جل و بەرگ</h4>
           <p>جلوبەرگێن دەستچن</p>
@@ -139,8 +139,9 @@
 
       <div class="product-grid-m">
         <div class="prod-card-m">
-          <span class="badge-hot-m">🔥 گەلەک هاتییە فرۆتن</span>
-          <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80');"></div>
+          <div class="prod-heart" onclick="toggleWishlist('Cute Medali', 15, 'https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=400&q=80')">♡</div>
+          <span class="badge-hot-m">🔥 پڕفرۆش</span>
+          <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=400&q=80');"></div>
           <div class="prod-title-m">Cute Medali</div>
           <div class="stars-m">★★★★★ (124)</div>
           <div class="price-m">$15</div>
@@ -148,6 +149,7 @@
         </div>
 
         <div class="prod-card-m">
+          <div class="prod-heart" onclick="toggleWishlist('Warm Scarf', 25, 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80')">♡</div>
           <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80');"></div>
           <div class="prod-title-m">Warm Scarf</div>
           <div class="stars-m">★★★★★ (98)</div>
@@ -158,42 +160,15 @@
     </div>
   </main>
 
-  <!-- 2. SHOP TAB -->
+  <!-- 2. SHOP TAB (گەلەری و فیلتەری بەرهەمەکان) -->
   <main id="tab-shop" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">هەمی بەرهەمێن دەستچن 🌸</h3>
+      <h3 class="sec-title" id="shopTitle">هەمی بەرهەمێن دەستچن 🌸</h3>
       <span class="sec-tag" onclick="switchNav('home')">← سەرەکی</span>
     </div>
-    <div class="product-grid-m">
-      <div class="prod-card-m">
-        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80');"></div>
-        <div class="prod-title-m">Cute Medali</div>
-        <div class="stars-m">★★★★★ (124)</div>
-        <div class="price-m">$15</div>
-        <button class="btn-buy-m" onclick="quickAdd('Cute Medali', 15)">زێدەکرن بۆ سەبەتێ</button>
-      </div>
-      <div class="prod-card-m">
-        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80');"></div>
-        <div class="prod-title-m">Warm Scarf</div>
-        <div class="stars-m">★★★★★ (98)</div>
-        <div class="price-m">$25</div>
-        <button class="btn-buy-m" onclick="quickAdd('Warm Scarf', 25)">زێدەکرن بۆ سەبەتێ</button>
-      </div>
-      <div class="prod-card-m">
-        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80');"></div>
-        <div class="prod-title-m">Crochet Hat</div>
-        <div class="stars-m">★★★★★ (76)</div>
-        <div class="price-m">$20</div>
-        <button class="btn-buy-m" onclick="quickAdd('Crochet Hat', 20)">زێدەکرن بۆ سەبەتێ</button>
-      </div>
-      <div class="prod-card-m">
-        <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80');"></div>
-        <div class="prod-title-m">Handmade Outfit</div>
-        <div class="stars-m">★★★★★ (112)</div>
-        <div class="price-m">$45</div>
-        <button class="btn-buy-m" onclick="quickAdd('Handmade Outfit', 45)">زێدەکرن بۆ سەبەتێ</button>
-      </div>
-    </div>
+
+    <!-- دەرچەی بەرهەمەکان بەپێی فیلتەر -->
+    <div class="product-grid-m" id="shopProductGrid"></div>
   </main>
 
   <!-- 3. SEARCH TAB -->
@@ -209,16 +184,13 @@
     </div>
   </main>
 
-  <!-- 4. WISHLIST TAB -->
+  <!-- 4. WISHLIST TAB (حەزژێکریێن من) -->
   <main id="tab-wishlist" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title">حەزژێکریێن من ♡</h3>
+      <span class="sec-tag" onclick="switchNav('shop')">کڕین</span>
     </div>
-    <div class="custom-input-box" style="text-align:center; padding:30px 10px;">
-      <p style="font-size:24px;">🌸</p>
-      <h4 style="font-size:13px; font-weight:700; margin:6px 0;">۳ بەرهەمێن پاراستی هەنە</h4>
-      <button class="btn-pink" style="margin-top:10px;" onclick="switchNav('shop')">کڕینا بەرهەمان</button>
-    </div>
+    <div class="custom-input-box" id="wishlistContentBox"></div>
   </main>
 
   <!-- 5. DUHOK DELIVERY CALCULATOR -->
@@ -231,18 +203,13 @@
     <div class="custom-input-box">
       <div class="field-group">
         <label>جهێ گەهاندنێ هەلبژێرە:</label>
-        <select id="deliveryLocation" onchange="calculateDelivery()">
+        <select id="deliveryLocation">
           <option value="3000">ناڤەندا باژێڕێ دهۆکێ (3,000 دینار)</option>
           <option value="4000">ماسیکێ / شۆڕش / مالتا (4,000 دینار)</option>
           <option value="5000">زاخۆ / سێمێل (5,000 دینار)</option>
           <option value="6000">هەولێر / سلێمانی (6,000 دینار)</option>
         </select>
       </div>
-
-      <div style="background:var(--bg-cream); border-radius:12px; padding:12px; margin-bottom:12px; font-size:11.5px; line-height:1.8;">
-        <p>⏱️ <strong>دەمێ گەهاندنێ:</strong> ۲٤ بۆ ٤٨ دەمژمێر</p>
-      </div>
-
       <button class="btn-pink" style="width:100%;" onclick="switchNav('shop')">دەستپێکرنا کڕینێ 🛍️</button>
     </div>
   </main>
