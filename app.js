@@ -327,14 +327,19 @@ function applyLanguage(lang) {
 
   document.querySelectorAll('.add-cart-btn').forEach(btn => btn.innerText = t.addCartBtn);
 
-  filterByCategory('all');
+  renderProductsGrid('all');
 }
 
 function filterByCategory(category) {
   switchNav('shop');
+  renderProductsGrid(category);
+}
+
+function renderProductsGrid(category) {
   const grid = document.getElementById('shopProductGrid');
   const title = document.getElementById('shopTitle');
   const t = translations[currentLang];
+  if (!grid) return;
 
   document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById('btn-cat-' + category);
@@ -343,9 +348,9 @@ function filterByCategory(category) {
   let filtered = allProducts;
   if (category !== 'all') {
     filtered = allProducts.filter(p => p.cat === category);
-    title.innerText = `${t.navTextShop}: ${category} 🌸`;
+    if (title) title.innerText = `${t.navTextShop}: ${category} 🌸`;
   } else {
-    title.innerText = t.shopTitleAll;
+    if (title) title.innerText = t.shopTitleAll;
   }
 
   let html = '';
@@ -510,8 +515,9 @@ function filterSearch(q) {
   res.innerHTML = html;
 }
 
-// Initial setup
+// لۆدکردنی زمان و جێگیرکردنی پەڕەی سەرەکی
 const savedLang = localStorage.getItem('hezha_lang') || 'ku';
 currentLang = savedLang;
 applyLanguage(currentLang);
+switchNav('home');
 checkAuthStatus();
