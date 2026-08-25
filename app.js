@@ -1,111 +1,254 @@
 /* ========================================================
-   HEZHA PRODUCTS, MULTI-LANGUAGE & CONTROLLER (FULLY FIXED)
+   HEZHA PRODUCTS, MULTI-LANGUAGE & CONTROLLER (COMPLETE & FIXED)
    ======================================================== */
 
-let currentLang = localStorage.getItem('hezha_lang') || 'ku';
+let currentLang = 'ku';
 let currentShopCategory = 'all';
-const WHATSAPP_NUMBER = '9647508863907'; // ژمارەی واتسئاپ
 
-// کلیلەکانی کتێگۆری بۆ وەرگێڕان
-const categoryKeys = {
-  medali: { ku: 'مەدالی', en: 'Keychain', ar: 'ميداليات' },
-  scarf: { ku: 'ملپێچ', en: 'Scarf', ar: 'وشاح' },
-  hat: { ku: 'کلاو', en: 'Beanie / Hat', ar: 'قبعات' },
-  clothing: { ku: 'جلوبەرگ', en: 'Clothing', ar: 'ملابس' }
+const translations = {
+  ku: {
+    langBtn: "🌐 کوردی",
+    topBadge: "✨ کرۆشێیا تایبەت",
+    heroText: "هندەک تشت دهێنە چێکرن...<br>هندەک تشت دهێنە هەستپێکرن. ♡",
+    heroShopBtn: "Shop Now ♡ →",
+    heroCustomBtn: "Make It Personal ✨",
+    featDelivery: "گەهاندنا دهۆکێ 🚚",
+    featGift: "پێچانا دیاریێ 🎁",
+    featQuality: "ب کوالێتییا بلند 💎",
+    secCatTitle: "بەشێن ئیشێن دەستچن ♡",
+    secSeeAll: "هەمییان ببینە →",
+    catCard1: "مەدالی",
+    catCardSub1: "مەدالیێن نازدار",
+    catCard2: "ملپێچ",
+    catCardSub2: "ملپێچێن گەرم",
+    catCard3: "کلاو",
+    catCardSub3: "کلاوێن کرۆشێ",
+    catCard4: "جل و بەرگ",
+    catCardSub4: "جلوبەرگێن دەستچن",
+    secBestTag: "پترترین داخوازی کری",
+    badgeHotText: "🔥 پڕفرۆش",
+    addCartBtn: "زێدەکرن بۆ سەبەتێ",
+    shopTitleAll: "هەمی بەرهەمێن دەستچن 🌸",
+    shopBackHome: "← سەرەکی",
+    catAll: "هەمی",
+    cat1: "مەدالی 🎀",
+    cat2: "ملپێچ 🧣",
+    cat3: "کلاو 🧶",
+    cat4: "جل و بەرگ 👗",
+    searchTitle: "لێگەڕیان 🔍",
+    searchPlaceholder: "ناڤێ بەرهەمی بنڤیسە...",
+    searchDefault: "ل چ بەرهەمەکێ دگەڕیی؟",
+    searchNoResults: "هیچ ئەنجامەک نەهاتە دیتن.",
+    wishTitle: "حەزژێکریێن من ♡",
+    wishShopTag: "کڕین",
+    wishEmpty: "هیچ بەرهەمەک نەهاتییە هەلبژارتن.",
+    delivTitle: "گەهاندنا دهۆکێ و دەوروبەر 🚚",
+    delivBackHome: "← سەرەکی",
+    delivSelectLabel: "جهێ گەهاندنێ هەلبژێرە:",
+    delivStartBtn: "دەستپێکرنا کڕینێ 🛍️",
+    customTitle: "داخوازیا تایبەت ✨",
+    customItemLabel: "جۆرێ دەستچنی:",
+    customMsgLabel: "نامەیا کارتێ:",
+    customPlaceholder: "نامەیەکا جوان بنڤیسە...",
+    customSendBtn: "فرێکرن ب WhatsApp 💬",
+    cartTitle: "سەبەتا تە 🛍️",
+    cartEmpty: "سەبەتا تە یا ڤالایە.",
+    cartTotal: "کۆمێ گشتی:",
+    cartCheckout: "تەمامکرنا داخوازیێ ب WhatsApp 💬",
+    profileTitle: "پرۆفایل و هەژمار 👤",
+    editAddrHeading: "دەستکاریکرنا ناڤونیشانی",
+    editAddrLabel: "باژێڕ و ناڤونیشان:",
+    updateAddrBtn: "نویکرنا ناڤونیشانی",
+    logoutBtn: "دەرکەفتن ژ هەژمارێ (Logout)",
+    createAccTitle: "دروستکرنا هەژمارێ ✨",
+    togglePhone: "ب ژمارا مۆبایلێ 📱",
+    toggleGmail: "ب ناڤونیشانێ Gmail ✉️",
+    nameLabel: "ناڤێ تە یێ سیانی:",
+    phoneLabel: "ژمارا مۆبایلێ (WhatsApp):",
+    gmailLabel: "ئیمەیڵ (Gmail):",
+    addressLabel: "باژێڕ و ناڤونیشان:",
+    sendCodeBtn: "ناردنا کۆدێ پشتڕاستکرنێ 📩",
+    verifyCodeTitle: "کۆدێ پشتڕاستکرنێ بنڤیسە 🔐",
+    confirmCodeBtn: "پشتڕاستکرن ✓",
+    backBtn: "← زڤڕین",
+    navTextHome: "سەرەکی",
+    navTextShop: "فرۆشگەهـ",
+    navTextSearch: "لێگەڕیان",
+    navTextWish: "حەزژێکری",
+    navTextProfile: "پرۆفایل",
+    dir: "rtl"
+  },
+  en: {
+    langBtn: "🌐 English",
+    topBadge: "✨ Exclusive Crochet",
+    heroText: "Some things are made...<br>Some things are felt. ♡",
+    heroShopBtn: "Shop Now ♡ →",
+    heroCustomBtn: "Make It Personal ✨",
+    featDelivery: "Duhok Delivery 🚚",
+    featGift: "Gift Wrapping 🎁",
+    featQuality: "Premium Quality 💎",
+    secCatTitle: "Handmade Categories ♡",
+    secSeeAll: "View All →",
+    catCard1: "Keychain",
+    catCardSub1: "Cute Keychains",
+    catCard2: "Scarf",
+    catCardSub2: "Warm Scarves",
+    catCard3: "Beanie / Hat",
+    catCardSub3: "Crochet Hats",
+    catCard4: "Clothing",
+    catCardSub4: "Handmade Outfits",
+    secBestTag: "Most Requested",
+    badgeHotText: "🔥 Bestseller",
+    addCartBtn: "Add to Bag",
+    shopTitleAll: "All Handmade Items 🌸",
+    shopBackHome: "← Home",
+    catAll: "All",
+    cat1: "Keychain 🎀",
+    cat2: "Scarf 🧣",
+    cat3: "Beanie 🧶",
+    cat4: "Clothing 👗",
+    searchTitle: "Search 🔍",
+    searchPlaceholder: "Search handmade items...",
+    searchDefault: "What are you looking for?",
+    searchNoResults: "No results found.",
+    wishTitle: "My Wishlist ♡",
+    wishShopTag: "Shop",
+    wishEmpty: "No items saved in wishlist.",
+    delivTitle: "Duhok & Region Delivery 🚚",
+    delivBackHome: "← Home",
+    delivSelectLabel: "Choose Delivery Area:",
+    delivStartBtn: "Start Shopping 🛍️",
+    customTitle: "Custom Order Studio ✨",
+    customItemLabel: "Select Crochet Type:",
+    customMsgLabel: "Card Message:",
+    customPlaceholder: "Write a lovely message...",
+    customSendBtn: "Send via WhatsApp 💬",
+    cartTitle: "Your Shopping Bag 🛍️",
+    cartEmpty: "Your bag is empty.",
+    cartTotal: "Total:",
+    cartCheckout: "Checkout via WhatsApp 💬",
+    profileTitle: "Profile & Account 👤",
+    editAddrHeading: "Edit Address",
+    editAddrLabel: "City & Address:",
+    updateAddrBtn: "Update Address",
+    logoutBtn: "Logout Account",
+    createAccTitle: "Create Account ✨",
+    togglePhone: "By Phone 📱",
+    toggleGmail: "By Gmail ✉️",
+    nameLabel: "Full Name:",
+    phoneLabel: "Phone Number (WhatsApp):",
+    gmailLabel: "Gmail Address:",
+    addressLabel: "City & Address:",
+    sendCodeBtn: "Send Verification Code 📩",
+    verifyCodeTitle: "Enter Verification Code 🔐",
+    confirmCodeBtn: "Verify ✓",
+    backBtn: "← Back",
+    navTextHome: "Home",
+    navTextShop: "Shop",
+    navTextSearch: "Search",
+    navTextWish: "Wishlist",
+    navTextProfile: "Profile",
+    dir: "ltr"
+  },
+  ar: {
+    langBtn: "🌐 العربية",
+    topBadge: "✨ كروشيه حصري",
+    heroText: "بعض الأشياء تُصنع...<br>وبعضها يُشعر بها. ♡",
+    heroShopBtn: "تسوق الآن ♡ →",
+    heroCustomBtn: "طلب خاص ✨",
+    featDelivery: "توصيل دهوك 🚚",
+    featGift: "تغليف هدايا 🎁",
+    featQuality: "جودة عالية 💎",
+    secCatTitle: "أقسام المشغولات اليدوية ♡",
+    secSeeAll: "عرض الكل →",
+    catCard1: "ميداليات",
+    catCardSub1: "ميداليات مميزة",
+    catCard2: "وشاح",
+    catCardSub2: "أوشحة دافئة",
+    catCard3: "قبعات",
+    catCardSub3: "قبعات كروشيه",
+    catCard4: "ملابس",
+    catCardSub4: "أزياء يدوية",
+    secBestTag: "الأكثر طلباً",
+    badgeHotText: "🔥 الأكثر مبيعاً",
+    addCartBtn: "إضافة إلى السلة",
+    shopTitleAll: "جميع المنتجات اليدوية 🌸",
+    shopBackHome: "← الرئيسية",
+    catAll: "الكل",
+    cat1: "ميداليات 🎀",
+    cat2: "وشاح 🧣",
+    cat3: "قبعات 🧶",
+    cat4: "ملابس 👗",
+    searchTitle: "البحث 🔍",
+    searchPlaceholder: "اكتب اسم المنتج...",
+    searchDefault: "عن ماذا تبحث؟",
+    searchNoResults: "لا توجد نتائج.",
+    wishTitle: "قائمتي المفضلة ♡",
+    wishShopTag: "تسوق",
+    wishEmpty: "لا توجد عناصر في المفضلة.",
+    delivTitle: "توصيل دهوك والمناطق 🚚",
+    delivBackHome: "← الرئيسية",
+    delivSelectLabel: "اختر موقع التوصيل:",
+    delivStartBtn: "ابدأ التسوق 🛍️",
+    customTitle: "استوديو الطلب الخاص ✨",
+    customItemLabel: "نوع القطعة:",
+    customMsgLabel: "رسالة الكارت:",
+    customPlaceholder: "اكتب رسالة لطيفة...",
+    customSendBtn: "إرسال عبر WhatsApp 💬",
+    cartTitle: "حقيبة التسوق 🛍️",
+    cartEmpty: "حقيبتك فارغة.",
+    cartTotal: "المجموع الكلي:",
+    cartCheckout: "إتمام الطلب عبر WhatsApp 💬",
+    profileTitle: "الملف الشخصي والحساب 👤",
+    editAddrHeading: "تعديل العنوان",
+    editAddrLabel: "المدينة والعنوان:",
+    updateAddrBtn: "تحديث العنوان",
+    logoutBtn: "تسجيل الخروج",
+    createAccTitle: "إنشاء حساب جديد ✨",
+    togglePhone: "عبر الهاتف 📱",
+    toggleGmail: "عبر Gmail ✉️",
+    nameLabel: "الاسم الثلاثي:",
+    phoneLabel: "رقم الهاتف (WhatsApp):",
+    gmailLabel: "البريد الإلكتروني:",
+    addressLabel: "المدينة والعنوان:",
+    sendCodeBtn: "إرسال رمز التحقق 📩",
+    verifyCodeTitle: "أدخل رمز التحقق 🔐",
+    confirmCodeBtn: "تأكيد ✓",
+    backBtn: "← رجوع",
+    navTextHome: "الرئيسية",
+    navTextShop: "المتجر",
+    navTextSearch: "البحث",
+    navTextWish: "المفضلة",
+    navTextProfile: "حسابي",
+    dir: "rtl"
+  }
 };
 
-// وەرگێڕانەکان (هەروەک پێشتر)
-const translations = { ... }; // وەک لە کۆدەکەتدا هەیە
-
-let myCart = JSON.parse(localStorage.getItem('hezha_cart')) || [];
-let myWishlist = JSON.parse(localStorage.getItem('hezha_wishlist')) || [];
-
-// هەموو بەرهەمەکان بە ناوی سێ زمان
-const allProducts = [
-  { 
-    id: 1, 
-    name: { ku: 'مەدالیێ نازدار', en: 'Cute Medali', ar: 'ميدالية لطيفة' }, 
-    price: 15, 
-    cat: 'medali', 
-    img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (124)" 
-  },
-  { 
-    id: 2, 
-    name: { ku: 'مەدالیێ گوڵ', en: 'Flower Medali', ar: 'ميدالية وردة' }, 
-    price: 12, 
-    cat: 'medali', 
-    img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (88)" 
-  },
-  { 
-    id: 3, 
-    name: { ku: 'ملپێچێ گەرم', en: 'Warm Scarf', ar: 'وشاح دافئ' }, 
-    price: 25, 
-    cat: 'scarf', 
-    img: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (98)" 
-  },
-  { 
-    id: 4, 
-    name: { ku: 'ملپێچێ گوڵ', en: 'Rose Scarf', ar: 'وشاح وردي' }, 
-    price: 28, 
-    cat: 'scarf', 
-    img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (104)" 
-  },
-  { 
-    id: 5, 
-    name: { ku: 'کلاوێ کرۆشێ', en: 'Crochet Hat', ar: 'قبعة كروشيه' }, 
-    price: 20, 
-    cat: 'hat', 
-    img: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (76)" 
-  },
-  { 
-    id: 6, 
-    name: { ku: 'بینیێ زڤستانێ', en: 'Winter Beanie', ar: 'قبعة شتوية' }, 
-    price: 22, 
-    cat: 'hat', 
-    img: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (92)" 
-  },
-  { 
-    id: 7, 
-    name: { ku: 'جلێ دەستچن', en: 'Handmade Outfit', ar: 'زي يدوي' }, 
-    price: 45, 
-    cat: 'clothing', 
-    img: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (112)" 
-  },
-  { 
-    id: 8, 
-    name: { ku: 'کاردیگانێ پەمەیی', en: 'Pink Cardigan', ar: 'كارديغان وردي' }, 
-    price: 50, 
-    cat: 'clothing', 
-    img: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80", 
-    stars: "★★★★★ (80)" 
-  }
+let myCart = [
+  { name: "Cute Medali", price: 15 },
+  { name: "Warm Scarf", price: 25 }
 ];
 
-// ---------- فەنکشنە گشتییەکان ----------
-function saveData() {
-  localStorage.setItem('hezha_cart', JSON.stringify(myCart));
-  localStorage.setItem('hezha_wishlist', JSON.stringify(myWishlist));
-}
+let myWishlist = [
+  { name: "Cute Medali", price: 15, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" }
+];
 
-function getProductName(p) {
-  return p.name[currentLang] || p.name.en;
-}
-
-function getCategoryName(catKey) {
-  return categoryKeys[catKey]?.[currentLang] || catKey;
-}
+const allProducts = [
+  { name: "Cute Medali", price: 15, cat: "مەدالی", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (124)" },
+  { name: "Flower Medali", price: 12, cat: "مەدالی", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (88)" },
+  { name: "Warm Scarf", price: 25, cat: "ملپێچ", img: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (98)" },
+  { name: "Rose Scarf", price: 28, cat: "ملپێچ", img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (104)" },
+  { name: "Crochet Hat", price: 20, cat: "کلاو", img: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (76)" },
+  { name: "Winter Beanie", price: 22, cat: "کلاو", img: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (92)" },
+  { name: "Handmade Outfit", price: 45, cat: "جلوبەرگ", img: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (112)" },
+  { name: "Pink Cardigan", price: 50, cat: "جلوبەرگ", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (80)" }
+];
 
 function cycleLanguage() {
   if (currentLang === 'ku') currentLang = 'en';
   else if (currentLang === 'en') currentLang = 'ar';
   else currentLang = 'ku';
+
   localStorage.setItem('hezha_lang', currentLang);
   applyLanguage(currentLang);
 }
@@ -120,23 +263,77 @@ function applyLanguage(lang) {
     if (el) isHtml ? el.innerHTML = val : el.innerText = val;
   };
 
-  // هەموو setEl ـەکان وەک پێشتر
-  // ...
-  // (لێرەدا بۆ کورتی هەموو setEl ـەکان نا‌نووسمەوە، بەڵام لە کۆدەکەتدا هەموویان هەن)
-  
-  // نوێکردنەوەی placeholder ـەکان
+  setEl('langBtn', t.langBtn);
+  setEl('topBadge', t.topBadge);
+  setEl('heroText', t.heroText, true);
+  setEl('heroShopBtn', t.heroShopBtn);
+  setEl('heroCustomBtn', t.heroCustomBtn);
+  setEl('featDelivery', t.featDelivery);
+  setEl('featGift', t.featGift);
+  setEl('featQuality', t.featQuality);
+  setEl('secCatTitle', t.secCatTitle);
+  setEl('secSeeAll', t.secSeeAll);
+  setEl('catCard1', t.catCard1);
+  setEl('catCardSub1', t.catCardSub1);
+  setEl('catCard2', t.catCard2);
+  setEl('catCardSub2', t.catCardSub2);
+  setEl('catCard3', t.catCard3);
+  setEl('catCardSub3', t.catCardSub3);
+  setEl('catCard4', t.catCard4);
+  setEl('catCardSub4', t.catCardSub4);
+  setEl('secBestTag', t.secBestTag);
+  setEl('badgeHotText', t.badgeHotText);
+  setEl('shopBackHome', t.shopBackHome);
+  setEl('btn-cat-all', t.catAll);
+  setEl('btn-cat-مەدالی', t.cat1);
+  setEl('btn-cat-ملپێچ', t.cat2);
+  setEl('btn-cat-کلاو', t.cat3);
+  setEl('btn-cat-جلوبەرگ', t.cat4);
+  setEl('searchTitle', t.searchTitle);
+  setEl('wishTitle', t.wishTitle);
+  setEl('wishShopTag', t.wishShopTag);
+  setEl('delivTitle', t.delivTitle);
+  setEl('delivBackHome', t.delivBackHome);
+  setEl('delivSelectLabel', t.delivSelectLabel);
+  setEl('delivStartBtn', t.delivStartBtn);
+  setEl('customTitle', t.customTitle);
+  setEl('customItemLabel', t.customItemLabel);
+  setEl('customMsgLabel', t.customMsgLabel);
+  setEl('customSendBtn', t.customSendBtn);
+  setEl('cartTitle', t.cartTitle);
+  setEl('profileTitle', t.profileTitle);
+  setEl('editAddrHeading', t.editAddrHeading);
+  setEl('editAddrLabel', t.editAddrLabel);
+  setEl('updateAddrBtn', t.updateAddrBtn);
+  setEl('logoutBtn', t.logoutBtn);
+  setEl('createAccTitle', t.createAccTitle);
+  setEl('togglePhoneBtn', t.togglePhone);
+  setEl('toggleGmailBtn', t.toggleGmail);
+  setEl('nameLabel', t.nameLabel);
+  setEl('phoneLabel', t.phoneLabel);
+  setEl('gmailLabel', t.gmailLabel);
+  setEl('addressLabel', t.addressLabel);
+  setEl('sendCodeBtn', t.sendCodeBtn);
+  setEl('verifyCodeTitle', t.verifyCodeTitle);
+  setEl('confirmCodeBtn', t.confirmCodeBtn);
+  setEl('backBtn', t.backBtn);
+  setEl('navTextHome', t.navTextHome);
+  setEl('navTextShop', t.navTextShop);
+  setEl('navTextSearch', t.navTextSearch);
+  setEl('navTextWish', t.navTextWish);
+  setEl('navTextProfile', t.navTextProfile);
+
   const searchInput = document.getElementById('searchInput');
   if (searchInput) searchInput.placeholder = t.searchPlaceholder;
 
   const custMsg = document.getElementById('custMsg');
   if (custMsg) custMsg.placeholder = t.customPlaceholder;
 
-  // نوێکردنەوەی دوگمەکانی add-cart
   document.querySelectorAll('.add-cart-btn').forEach(btn => btn.innerText = t.addCartBtn);
 
-  // نوێکردنەوەی ئەنجامی گەڕان ئەگەر بەتاڵ بێت
   const res = document.getElementById('searchBoxResult');
-  if (res && !searchInput?.value.trim()) {
+  const searchVal = searchInput ? searchInput.value : '';
+  if (res && !searchVal) {
     res.innerHTML = t.searchDefault;
   }
 
@@ -144,32 +341,7 @@ function applyLanguage(lang) {
   renderProductsGrid(currentShopCategory);
 }
 
-function toggleTheme() {
-  document.body.classList.toggle('dark-mode');
-  const isDark = document.body.classList.contains('dark-mode');
-  const emoji = document.getElementById('themeEmoji');
-  if (emoji) emoji.innerText = isDark ? '☀️' : '🌙';
-  localStorage.setItem('hezha_theme', isDark ? 'dark' : 'light');
-}
-
-function switchNav(tab) {
-  document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active-tab'));
-  const target = document.getElementById('tab-' + tab);
-  if (target) target.classList.add('active-tab');
-
-  document.querySelectorAll('.dock-link').forEach(l => l.classList.remove('active'));
-  const activeNav = document.getElementById('nav-' + tab);
-  if (activeNav) activeNav.classList.add('active');
-
-  if (tab === 'cart') renderCart();
-  if (tab === 'wishlist') renderWishlist();
-  if (tab === 'profile') checkAuthStatus();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ---------- کتێگۆری و گەڕان ----------
 function filterByCategory(category) {
-  currentShopCategory = category;
   switchNav('shop');
   renderProductsGrid(category);
 }
@@ -187,81 +359,42 @@ function renderProductsGrid(category) {
   if (activeBtn) activeBtn.classList.add('active');
 
   let filtered = allProducts;
-  let titleText = t.shopTitleAll;
   if (category !== 'all') {
     filtered = allProducts.filter(p => p.cat === category);
-    titleText = `${t.navTextShop}: ${getCategoryName(category)} 🌸`;
+    if (title) title.innerText = `${t.navTextShop}: ${category} 🌸`;
+  } else {
+    if (title) title.innerText = t.shopTitleAll;
   }
-  if (title) title.innerText = titleText;
 
   let html = '';
   filtered.forEach(p => {
-    const name = getProductName(p);
-    const isWished = myWishlist.some(w => w.id === p.id);
+    const isWished = myWishlist.some(w => w.name === p.name);
     html += `
       <div class="prod-card-m">
-        <div class="prod-heart ${isWished ? 'active' : ''}" onclick="toggleWishlist(${p.id}, '${name}', ${p.price}, '${p.img}')">${isWished ? '♥' : '♡'}</div>
+        <div class="prod-heart ${isWished ? 'active' : ''}" onclick="toggleWishlist('${p.name}', ${p.price}, '${p.img}')">${isWished ? '♥' : '♡'}</div>
         <div class="prod-img-m" style="background-image:url('${p.img}');"></div>
-        <div class="prod-title-m">${name}</div>
+        <div class="prod-title-m">${p.name}</div>
         <div class="stars-m">${p.stars}</div>
         <div class="price-m">$${p.price}</div>
-        <button class="btn-buy-m add-cart-btn" onclick="quickAdd(${p.id}, '${name}', ${p.price})">${t.addCartBtn}</button>
+        <button class="btn-buy-m add-cart-btn" onclick="quickAdd('${p.name}', ${p.price})">${t.addCartBtn}</button>
       </div>
     `;
   });
   grid.innerHTML = html;
 }
 
-function filterSearch(q) {
-  const res = document.getElementById('searchBoxResult');
-  const t = translations[currentLang];
-  if (!res) return;
-  q = q.trim();
-  if (!q) {
-    res.innerHTML = t.searchDefault;
-    return;
-  }
-  const lowerQ = q.toLowerCase();
-  const matched = allProducts.filter(p => {
-    const name = getProductName(p).toLowerCase();
-    return name.includes(lowerQ);
-  });
-  if (matched.length === 0) {
-    res.innerHTML = `<p style='padding:20px; color:var(--muted);'>${t.searchNoResults}</p>`;
-    return;
-  }
-  let html = '';
-  matched.forEach(p => {
-    const name = getProductName(p);
-    html += `
-      <div class="prod-card-m" style="margin-top:10px;">
-        <div class="prod-img-m" style="background-image:url('${p.img}');"></div>
-        <div class="prod-title-m">${name}</div>
-        <div class="price-m">$${p.price}</div>
-        <button class="btn-buy-m add-cart-btn" onclick="quickAdd(${p.id}, '${name}', ${p.price})">${t.addCartBtn}</button>
-      </div>
-    `;
-  });
-  res.innerHTML = html;
-}
-
-// ---------- Wishlist ----------
-function toggleWishlist(id, name, price, img) {
-  const exists = myWishlist.some(w => w.id === id);
+function toggleWishlist(name, price, img) {
+  const exists = myWishlist.some(w => w.name === name);
   if (!exists) {
-    myWishlist.push({ id, name, price, img });
+    myWishlist.push({ name, price, img });
     alert(`♡ "${name}"`);
   } else {
-    myWishlist = myWishlist.filter(w => w.id !== id);
+    myWishlist = myWishlist.filter(w => w.name !== name);
   }
-  saveData();
-  updateWishCount();
+  const wishCountEl = document.getElementById('topWishCount');
+  if (wishCountEl) wishCountEl.innerText = myWishlist.length;
+
   renderProductsGrid(currentShopCategory);
-  // ئەگەر لە گەڕاندا بین، ئەنجامەکەش نوێ بکەرەوە
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput && searchInput.value.trim()) {
-    filterSearch(searchInput.value);
-  }
 }
 
 function renderWishlist() {
@@ -285,16 +418,37 @@ function renderWishlist() {
   box.innerHTML = html;
 }
 
-function updateWishCount() {
-  const el = document.getElementById('topWishCount');
-  if (el) el.innerText = myWishlist.length;
+function toggleTheme() {
+  document.body.classList.toggle('dark-mode');
+  const isDark = document.body.classList.contains('dark-mode');
+  document.getElementById('themeEmoji').innerText = isDark ? '☀️' : '🌙';
+  localStorage.setItem('hezha_theme', isDark ? 'dark' : 'light');
 }
 
-// ---------- Cart ----------
-function quickAdd(id, name, price) {
-  myCart.push({ id, name, price });
-  saveData();
-  updateBagCount();
+if (localStorage.getItem('hezha_theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  const emoji = document.getElementById('themeEmoji');
+  if (emoji) emoji.innerText = '☀️';
+}
+
+function switchNav(tab) {
+  document.querySelectorAll('.tab-view').forEach(t => t.classList.remove('active-tab'));
+  const target = document.getElementById('tab-' + tab);
+  if (target) target.classList.add('active-tab');
+
+  document.querySelectorAll('.dock-link').forEach(l => l.classList.remove('active'));
+  const activeNav = document.getElementById('nav-' + tab);
+  if (activeNav) activeNav.classList.add('active');
+
+  if (tab === 'cart') renderCart();
+  if (tab === 'wishlist') renderWishlist();
+  if (tab === 'profile') checkAuthStatus();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function quickAdd(name, price) {
+  myCart.push({ name, price });
+  document.getElementById('topBagCount').innerText = myCart.length;
   alert(`🌸 "${name}"`);
 }
 
@@ -308,15 +462,9 @@ function renderCart() {
   }
   let total = 0;
   let html = `<div style="border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:10px;">`;
-  myCart.forEach((item, index) => {
+  myCart.forEach(item => {
     total += item.price;
-    html += `
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-        <span>🌸 ${item.name}</span>
-        <span style="font-weight:700;">$${item.price}</span>
-        <button onclick="removeFromCart(${index})" style="background:none; border:none; color:red; cursor:pointer;">✕</button>
-      </div>
-    `;
+    html += `<div style="display:flex; justify-content:space-between; margin-bottom:6px;"><span>🌸 ${item.name}</span><span style="font-weight:700;">$${item.price}</span></div>`;
   });
   html += `</div>
     <div style="display:flex; justify-content:space-between; font-weight:800; font-size:13px; margin-bottom:14px;">
@@ -326,174 +474,68 @@ function renderCart() {
   box.innerHTML = html;
 }
 
-function removeFromCart(index) {
-  myCart.splice(index, 1);
-  saveData();
-  updateBagCount();
-  renderCart();
-}
-
-function updateBagCount() {
-  const el = document.getElementById('topBagCount');
-  if (el) el.innerText = myCart.length;
-}
-
 function checkoutWithAccount(total) {
-  let account = null;
-  try {
-    account = JSON.parse(localStorage.getItem('hezha_account'));
-  } catch (e) {
-    account = null;
+  const stored = localStorage.getItem('hezha_account');
+  let name = 'N/A', contact = 'N/A', address = 'N/A';
+
+  if (stored) {
+    const u = JSON.parse(stored);
+    name = u.name;
+    contact = u.contact;
+    address = u.address;
   }
-  let name = account?.name || 'N/A';
-  let contact = account?.contact || 'N/A';
-  let address = account?.address || 'N/A';
 
   const items = myCart.map(i => i.name).join('، ');
-  const text = `HEZHA Order:%0A` +
-               `👤 Customer: ${name}%0A` +
-               `📞 Contact: ${contact}%0A` +
-               `📍 Address: ${address}%0A` +
-               `🌸 Items: ${items}%0A` +
-               `💰 Total: $${total}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+  let text = `HEZHA Order:%0A` +
+             `👤 Customer: ${name}%0A` +
+             `📞 Contact: ${contact}%0A` +
+             `📍 Address: ${address}%0A` +
+             `🌸 Items: ${items}%0A` +
+             `💰 Total: $${total}`;
+
+  window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
 function orderWhatsAppCustom() {
-  const itemEl = document.getElementById('custItem');
-  const msgEl = document.getElementById('custMsg');
-  if (!itemEl || !msgEl) return;
-  const item = itemEl.value;
-  const msg = msgEl.value;
-  let account = null;
-  try {
-    account = JSON.parse(localStorage.getItem('hezha_account'));
-  } catch (e) {
-    account = null;
-  }
-  const name = account?.name || 'N/A';
-  const text = `HEZHA Custom Order:%0A👤 Customer: ${name}%0A🌸 Type: ${item}%0A💌 Note: ${msg || 'None'}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+  const item = document.getElementById('custItem').value;
+  const msg = document.getElementById('custMsg').value;
+  const stored = localStorage.getItem('hezha_account');
+  let name = stored ? JSON.parse(stored).name : 'N/A';
+
+  let text = `HEZHA Custom Order:%0A👤 Customer: ${name}%0A🌸 Type: ${item}%0A💌 Note: ${msg || 'None'}`;
+  window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
-// ---------- Account & Auth ----------
-function checkAuthStatus() {
-  const profileBox = document.getElementById('profileContentBox');
-  if (!profileBox) return;
-  let account = null;
-  try {
-    account = JSON.parse(localStorage.getItem('hezha_account'));
-  } catch (e) {
-    account = null;
-  }
-  if (account) {
-    profileBox.innerHTML = `
-      <p><strong>${account.name}</strong></p>
-      <p>📞 ${account.contact}</p>
-      <p>📍 ${account.address}</p>
-      <button onclick="logout()">${translations[currentLang].logoutBtn}</button>
-      <hr>
-      <h3>${translations[currentLang].editAddrHeading}</h3>
-      <label>${translations[currentLang].editAddrLabel}</label>
-      <input type="text" id="newAddress" value="${account.address}" />
-      <button onclick="updateAddress()">${translations[currentLang].updateAddrBtn}</button>
-    `;
-  } else {
-    profileBox.innerHTML = `
-      <h3>${translations[currentLang].createAccTitle}</h3>
-      <button id="togglePhoneBtn" onclick="toggleAuthMethod('phone')">${translations[currentLang].togglePhone}</button>
-      <button id="toggleGmailBtn" onclick="toggleAuthMethod('gmail')">${translations[currentLang].toggleGmail}</button>
-      <div id="authFields">
-        <label>${translations[currentLang].nameLabel}</label>
-        <input type="text" id="authName" />
-        <label id="phoneLabel">${translations[currentLang].phoneLabel}</label>
-        <input type="tel" id="authPhone" />
-        <label>${translations[currentLang].addressLabel}</label>
-        <input type="text" id="authAddress" />
-        <button onclick="sendCode()">${translations[currentLang].sendCodeBtn}</button>
-      </div>
-      <div id="verifySection" style="display:none;">
-        <label>${translations[currentLang].verifyCodeTitle}</label>
-        <input type="text" id="authCode" />
-        <button onclick="confirmCode()">${translations[currentLang].confirmCodeBtn}</button>
-      </div>
-    `;
-  }
-}
-
-function toggleAuthMethod(method) {
-  const phoneLabel = document.getElementById('phoneLabel');
-  const gmailLabel = document.getElementById('gmailLabel');
-  const phoneInput = document.getElementById('authPhone');
-  const gmailInput = document.getElementById('authGmail');
-  if (method === 'phone') {
-    if (phoneLabel) phoneLabel.style.display = 'block';
-    if (gmailLabel) gmailLabel.style.display = 'none';
-    if (phoneInput) phoneInput.style.display = 'block';
-    if (gmailInput) gmailInput.style.display = 'none';
-  } else {
-    if (phoneLabel) phoneLabel.style.display = 'none';
-    if (gmailLabel) gmailLabel.style.display = 'block';
-    if (phoneInput) phoneInput.style.display = 'none';
-    if (gmailInput) gmailInput.style.display = 'block';
-  }
-}
-
-function sendCode() {
-  // لێرە کۆدی پشتڕاستکردنەوە دەنێردرێت (بە شێوەیەکی سادە)
-  document.getElementById('verifySection').style.display = 'block';
-  alert('کۆدی پشتڕاستکردنەوە نێردرا');
-}
-
-function confirmCode() {
-  const name = document.getElementById('authName').value;
-  const phone = document.getElementById('authPhone')?.value || '';
-  const gmail = document.getElementById('authGmail')?.value || '';
-  const address = document.getElementById('authAddress').value;
-  if (!name || !address) {
-    alert('تکایە ناو و ناونیشان پڕکەرەوە');
+function filterSearch(q) {
+  const res = document.getElementById('searchBoxResult');
+  const t = translations[currentLang];
+  if (!res) return;
+  if (!q.trim()) {
+    res.innerHTML = t.searchDefault;
     return;
   }
-  const contact = phone || gmail;
-  const account = { name, contact, address };
-  localStorage.setItem('hezha_account', JSON.stringify(account));
-  checkAuthStatus();
-}
-
-function updateAddress() {
-  const newAddr = document.getElementById('newAddress').value;
-  if (!newAddr) return;
-  let account = JSON.parse(localStorage.getItem('hezha_account')) || {};
-  account.address = newAddr;
-  localStorage.setItem('hezha_account', JSON.stringify(account));
-  checkAuthStatus();
-}
-
-function logout() {
-  localStorage.removeItem('hezha_account');
-  checkAuthStatus();
-}
-
-// ---------- دەستپێکردن ----------
-document.addEventListener('DOMContentLoaded', () => {
-  // گەڕان
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => filterSearch(e.target.value));
+  const matched = allProducts.filter(p => p.name.toLowerCase().includes(q.toLowerCase()));
+  if (matched.length === 0) {
+    res.innerHTML = `<p style='padding:20px; color:var(--muted);'>${t.searchNoResults}</p>`;
+    return;
   }
+  let html = '';
+  matched.forEach(p => {
+    html += `
+      <div class="prod-card-m" style="margin-top:10px;">
+        <div class="prod-img-m" style="background-image:url('${p.img}');"></div>
+        <div class="prod-title-m">${p.name}</div>
+        <div class="price-m">$${p.price}</div>
+        <button class="btn-buy-m add-cart-btn" onclick="quickAdd('${p.name}', ${p.price})">${t.addCartBtn}</button>
+      </div>
+    `;
+  });
+  res.innerHTML = html;
+}
 
-  // دانانی ژمارەی سەرەتایی
-  updateBagCount();
-  updateWishCount();
-
-  // بابەتی تاریک
-  if (localStorage.getItem('hezha_theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    const emoji = document.getElementById('themeEmoji');
-    if (emoji) emoji.innerText = '☀️';
-  }
-
-  // دەستپێکردنی زمان و ناوبردن
-  applyLanguage(currentLang);
-  switchNav('home');
-});
+// دەستپێکردنی بێ‌کێشە
+const savedLang = localStorage.getItem('hezha_lang') || 'ku';
+currentLang = savedLang;
+applyLanguage(currentLang);
+switchNav('home');
+checkAuthStatus();
