@@ -533,7 +533,7 @@ function filterSearch(q) {
   res.innerHTML = html;
 }
 
-// دەستپێکردنی بێ‌کێشە
+// لۆدکردنی زمان و دەستپێکردنی ڕاستەوخۆ لەسەر پەڕەی سەرەکی
 const savedLang = localStorage.getItem('hezha_lang') || 'ku';
 currentLang = savedLang;
 applyLanguage(currentLang);
