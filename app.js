@@ -11,19 +11,28 @@ let myWishlist = [
   { name: "Cute Medali", price: 15, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" }
 ];
 
-// هەموو بەرهەمەکانی فرۆشگا بە پۆلەکانیانەوە
 const allProducts = [
   { name: "Cute Medali", price: 15, cat: "مەدالی", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (124)" },
+  { name: "Flower Medali", price: 12, cat: "مەدالی", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (88)" },
   { name: "Warm Scarf", price: 25, cat: "ملپێچ", img: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (98)" },
+  { name: "Rose Scarf", price: 28, cat: "ملپێچ", img: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (104)" },
   { name: "Crochet Hat", price: 20, cat: "کلاو", img: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (76)" },
-  { name: "Handmade Outfit", price: 45, cat: "جلوبەرگ", img: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (112)" }
+  { name: "Winter Beanie", price: 22, cat: "کلاو", img: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (92)" },
+  { name: "Handmade Outfit", price: 45, cat: "جلوبەرگ", img: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (112)" },
+  { name: "Pink Cardigan", price: 50, cat: "جلوبەرگ", img: "https://images.unsplash.com/photo-1596704017254-9b121068fb31?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (80)" }
 ];
 
-// فیلتەرکردنی بەشەکان کاتێک کلیک لەسەر پۆلێک دەکرێت
 function filterByCategory(category) {
+  // سەرەتا پەڕەی فرۆشگە دەکەینەوە بێ ئەوەی فیلتەرەکە تێک بچێت
   switchNav('shop');
+  
   const grid = document.getElementById('shopProductGrid');
   const title = document.getElementById('shopTitle');
+
+  // گۆڕینی ڕەنگی دوگمەکانی سەرەوە بۆ پەمەیی (Active)
+  document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById('btn-cat-' + category);
+  if (activeBtn) activeBtn.classList.add('active');
 
   let filtered = allProducts;
   if (category !== 'all') {
@@ -63,16 +72,19 @@ function toggleWishlist(name, price, img) {
 
 function renderWishlist() {
   const box = document.getElementById('wishlistContentBox');
+  if (!box) return;
   if (myWishlist.length === 0) {
     box.innerHTML = `<p style="color:var(--muted); text-align:center; padding:15px;">هیچ بەرهەمەک نەهاتییە هەلبژارتن.</p>`;
     return;
   }
   let html = '';
   myWishlist.forEach(w => {
-    html += `<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:8px;">
-      <span style="font-weight:700;">🌸 ${w.name}</span>
-      <span style="font-weight:700; color:var(--deep-berry);">$${w.price}</span>
-    </div>`;
+    html += `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:8px;">
+        <span style="font-weight:700;">🌸 ${w.name}</span>
+        <span style="font-weight:700; color:var(--deep-berry);">$${w.price}</span>
+      </div>
+    `;
   });
   box.innerHTML = html;
 }
@@ -99,7 +111,7 @@ function switchNav(tab) {
   const activeNav = document.getElementById('nav-' + tab);
   if (activeNav) activeNav.classList.add('active');
 
-  if (tab === 'shop') filterByCategory('all');
+  // کێشە گەورەکە لێرەبوو کە سڕیمەوە! ئێستا هەرگیز بەشەکان خۆیان تێک نادەن.
   if (tab === 'cart') renderCart();
   if (tab === 'wishlist') renderWishlist();
   if (tab === 'profile') checkAuthStatus();
@@ -114,6 +126,7 @@ function quickAdd(name, price) {
 
 function renderCart() {
   const box = document.getElementById('cartContentBox');
+  if (!box) return;
   if (myCart.length === 0) {
     box.innerHTML = `<p style="color:var(--muted); text-align:center; padding:15px;">سەبەتا تە یا ڤالایە.</p>`;
     return;
@@ -166,14 +179,30 @@ function orderWhatsAppCustom() {
 
 function filterSearch(q) {
   const res = document.getElementById('searchBoxResult');
+  if (!res) return;
   if (!q.trim()) {
     res.innerHTML = "ل چ بەرهەمەکێ دگەڕیی؟";
     return;
   }
-  res.innerHTML = `<div class="prod-card-m" style="margin-top:10px;">
-    <div class="prod-title-m">ئەنجام بۆ: "${q}"</div>
-    <button class="btn-buy-m" style="margin-top:8px;" onclick="switchNav('shop')">دیتنا هەمی بەرهەمان</button>
-  </div>`;
+  const matched = allProducts.filter(p => p.name.toLowerCase().includes(q.toLowerCase()));
+  if (matched.length === 0) {
+    res.innerHTML = "<p style='padding:20px; color:var(--muted);'>هیچ بەرهەمەک نەهاتە دیتن.</p>";
+    return;
+  }
+  let html = '';
+  matched.forEach(p => {
+    html += `
+      <div class="prod-card-m" style="margin-top:10px;">
+        <div class="prod-img-m" style="background-image:url('${p.img}');"></div>
+        <div class="prod-title-m">${p.name}</div>
+        <div class="price-m">$${p.price}</div>
+        <button class="btn-buy-m" onclick="quickAdd('${p.name}', ${p.price})">زێدەکرن بۆ سەبەتێ</button>
+      </div>
+    `;
+  });
+  res.innerHTML = html;
 }
 
+// کاتێک سایتەکە دەکرێتەوە ڕاستەوخۆ هەموو بەرهەمەکان لۆد بکات
+filterByCategory('all');
 checkAuthStatus();
