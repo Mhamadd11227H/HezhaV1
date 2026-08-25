@@ -1,8 +1,9 @@
 /* ========================================================
-   HEZHA PRODUCTS, MULTI-LANGUAGE & CONTROLLER (FIXED)
+   HEZHA PRODUCTS, MULTI-LANGUAGE & CONTROLLER (COMPLETE & FIXED)
    ======================================================== */
 
 let currentLang = 'ku';
+let currentShopCategory = 'all';
 
 const translations = {
   ku: {
@@ -37,6 +38,7 @@ const translations = {
     searchTitle: "لێگەڕیان 🔍",
     searchPlaceholder: "ناڤێ بەرهەمی بنڤیسە...",
     searchDefault: "ل چ بەرهەمەکێ دگەڕیی؟",
+    searchNoResults: "هیچ ئەنجامەک نەهاتە دیتن.",
     wishTitle: "حەزژێکریێن من ♡",
     wishShopTag: "کڕین",
     wishEmpty: "هیچ بەرهەمەک نەهاتییە هەلبژارتن.",
@@ -108,6 +110,7 @@ const translations = {
     searchTitle: "Search 🔍",
     searchPlaceholder: "Search handmade items...",
     searchDefault: "What are you looking for?",
+    searchNoResults: "No results found.",
     wishTitle: "My Wishlist ♡",
     wishShopTag: "Shop",
     wishEmpty: "No items saved in wishlist.",
@@ -179,6 +182,7 @@ const translations = {
     searchTitle: "البحث 🔍",
     searchPlaceholder: "اكتب اسم المنتج...",
     searchDefault: "عن ماذا تبحث؟",
+    searchNoResults: "لا توجد نتائج.",
     wishTitle: "قائمتي المفضلة ♡",
     wishShopTag: "تسوق",
     wishEmpty: "لا توجد عناصر في المفضلة.",
@@ -229,7 +233,6 @@ let myWishlist = [
   { name: "Cute Medali", price: 15, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" }
 ];
 
-// هەموو وێنە هەڵەکان (بڕۆکەلی و پێڵاو) لێرەش بە وێنەی دروستی کڕۆشێ گۆڕدران
 const allProducts = [
   { name: "Cute Medali", price: 15, cat: "مەدالی", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (124)" },
   { name: "Flower Medali", price: 12, cat: "مەدالی", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (88)" },
@@ -328,8 +331,14 @@ function applyLanguage(lang) {
 
   document.querySelectorAll('.add-cart-btn').forEach(btn => btn.innerText = t.addCartBtn);
 
-  // لێرە تەنها گریدەکە نوێ دەکەینەوە بێ ئەوەی لاپەڕەکە بگۆڕدرێت
-  renderProductsGrid('all');
+  const res = document.getElementById('searchBoxResult');
+  const searchVal = searchInput ? searchInput.value : '';
+  if (res && !searchVal) {
+    res.innerHTML = t.searchDefault;
+  }
+
+  renderWishlist();
+  renderProductsGrid(currentShopCategory);
 }
 
 function filterByCategory(category) {
@@ -342,6 +351,8 @@ function renderProductsGrid(category) {
   const title = document.getElementById('shopTitle');
   const t = translations[currentLang];
   if (!grid) return;
+
+  currentShopCategory = category;
 
   document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
   const activeBtn = document.getElementById('btn-cat-' + category);
@@ -357,9 +368,10 @@ function renderProductsGrid(category) {
 
   let html = '';
   filtered.forEach(p => {
+    const isWished = myWishlist.some(w => w.name === p.name);
     html += `
       <div class="prod-card-m">
-        <div class="prod-heart" onclick="toggleWishlist('${p.name}', ${p.price}, '${p.img}')">♡</div>
+        <div class="prod-heart ${isWished ? 'active' : ''}" onclick="toggleWishlist('${p.name}', ${p.price}, '${p.img}')">${isWished ? '♥' : '♡'}</div>
         <div class="prod-img-m" style="background-image:url('${p.img}');"></div>
         <div class="prod-title-m">${p.name}</div>
         <div class="stars-m">${p.stars}</div>
@@ -379,7 +391,10 @@ function toggleWishlist(name, price, img) {
   } else {
     myWishlist = myWishlist.filter(w => w.name !== name);
   }
-  document.getElementById('topWishCount').innerText = myWishlist.length;
+  const wishCountEl = document.getElementById('topWishCount');
+  if (wishCountEl) wishCountEl.innerText = myWishlist.length;
+
+  renderProductsGrid(currentShopCategory);
 }
 
 function renderWishlist() {
@@ -393,8 +408,9 @@ function renderWishlist() {
   let html = '';
   myWishlist.forEach(w => {
     html += `
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:8px;">
-        <span style="font-weight:700;">🌸 ${w.name}</span>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; border-bottom:1px solid var(--border); padding-bottom:8px;">
+        <div style="width:44px; height:44px; border-radius:8px; background-size:cover; background-position:center; background-image:url('${w.img || ''}'); flex-shrink:0;"></div>
+        <span style="font-weight:700; flex:1;">🌸 ${w.name}</span>
         <span style="font-weight:700; color:var(--deep-berry);">$${w.price}</span>
       </div>
     `;
@@ -500,7 +516,7 @@ function filterSearch(q) {
   }
   const matched = allProducts.filter(p => p.name.toLowerCase().includes(q.toLowerCase()));
   if (matched.length === 0) {
-    res.innerHTML = "<p style='padding:20px; color:var(--muted);'>No results found.</p>";
+    res.innerHTML = `<p style='padding:20px; color:var(--muted);'>${t.searchNoResults}</p>`;
     return;
   }
   let html = '';
@@ -517,7 +533,7 @@ function filterSearch(q) {
   res.innerHTML = html;
 }
 
-// هەردەم وێبسایتەکە سەرەتا لەسەر پەڕەی سەرەکی (Home) دەکرێتەوە
+// لۆدکردنی زمان و دەستپێکردنی ڕاستەوخۆ لەسەر پەڕەی سەرەکی
 const savedLang = localStorage.getItem('hezha_lang') || 'ku';
 currentLang = savedLang;
 applyLanguage(currentLang);
