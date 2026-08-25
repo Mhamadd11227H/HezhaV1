@@ -1,8 +1,8 @@
 /* ========================================================
-   HEZHA PRODUCTS, MULTI-LANGUAGE & CONTROLLER
+   HEZHA PRODUCTS, MULTI-LANGUAGE & CONTROLLER (FIXED)
    ======================================================== */
 
-let currentLang = 'ku'; // ku -> en -> ar
+let currentLang = 'ku';
 
 const translations = {
   ku: {
@@ -229,6 +229,7 @@ let myWishlist = [
   { name: "Cute Medali", price: 15, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80" }
 ];
 
+// هەموو وێنە هەڵەکان (بڕۆکەلی و پێڵاو) لێرەش بە وێنەی دروستی کڕۆشێ گۆڕدران
 const allProducts = [
   { name: "Cute Medali", price: 15, cat: "مەدالی", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (124)" },
   { name: "Flower Medali", price: 12, cat: "مەدالی", img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=400&q=80", stars: "★★★★★ (88)" },
@@ -327,6 +328,7 @@ function applyLanguage(lang) {
 
   document.querySelectorAll('.add-cart-btn').forEach(btn => btn.innerText = t.addCartBtn);
 
+  // لێرە تەنها گریدەکە نوێ دەکەینەوە بێ ئەوەی لاپەڕەکە بگۆڕدرێت
   renderProductsGrid('all');
 }
 
@@ -515,9 +517,10 @@ function filterSearch(q) {
   res.innerHTML = html;
 }
 
-// لۆدکردنی زمان و جێگیرکردنی پەڕەی سەرەکی
+// هەردەم وێبسایتەکە سەرەتا لەسەر پەڕەی سەرەکی (Home) دەکرێتەوە
 const savedLang = localStorage.getItem('hezha_lang') || 'ku';
 currentLang = savedLang;
 applyLanguage(currentLang);
 switchNav('home');
 checkAuthStatus();
+   
