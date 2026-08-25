@@ -10,14 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,600&family=Noto+Kufi+Arabic:wght@500;700;800&family=Playfair+Display:ital,wght@1,600&family=Plus+Jakarta+Sans:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 </head>
 <body>
 
-  <!-- Top Strip with Language Switcher -->
+  <!-- Top Strip with Direct Clickable Language Switcher -->
   <div class="top-strip">
-    <span onclick="cycleLanguage()" style="cursor:pointer; font-weight:800; background:rgba(255,255,255,0.4); padding:2px 8px; border-radius:12px;" id="langBtn">🌐 کوردی</span>
+    <span onclick="cycleLanguage()" style="cursor:pointer; font-weight:800; background:rgba(255,255,255,0.4); padding:3px 10px; border-radius:12px;" id="langBtn">🌐 کوردی</span>
     <span id="topMiddle">♡ Handmade with love · HEZHA</span>
     <span id="topBadge">✨ کرۆشێیا تایبەت</span>
   </div>
@@ -87,7 +85,7 @@
     <!-- Badges -->
     <div class="features-scroll">
       <div class="feat-pill" onclick="switchNav('delivery')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
         <span id="featDelivery">گەهاندنا دهۆکێ 🚚</span>
       </div>
       <div class="feat-pill">
@@ -168,7 +166,6 @@
       <span class="sec-tag" id="shopBackHome" onclick="switchNav('home')">← سەرەکی</span>
     </div>
 
-    <!-- دوگمەکانی فیلتەرکردن -->
     <div class="cat-pill-bar">
       <button class="cat-btn active" id="btn-cat-all" onclick="filterByCategory('all')">هەمی</button>
       <button class="cat-btn" id="btn-cat-مەدالی" onclick="filterByCategory('مەدالی')">مەدالی 🎀</button>
@@ -304,8 +301,6 @@
           <input type="text" id="regAddress" placeholder="دهۆک، تاخێ...">
         </div>
 
-        <div id="recaptcha-container"></div>
-
         <button class="btn-pink" id="sendCodeBtn" style="width:100%; margin-top:8px;" onclick="sendVerificationCode()">ناردنا کۆدێ پشتڕاستکرنێ 📩</button>
       </div>
     </div>
@@ -328,7 +323,6 @@
     </div>
   </main>
 
-  <!-- Dock Navigation -->
   <nav class="dock-m">
     <div class="dock-link active" id="nav-home" onclick="switchNav('home')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
