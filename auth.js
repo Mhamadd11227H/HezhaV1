@@ -1,9 +1,7 @@
 /* ========================================================
-   HEZHA AUTHENTICATION & FIREBASE OTP SYSTEM
-   تێبینی: کاتێک لە Firebase پڕۆژەت دروستکرد، زانیارییەکانت لێرە دابنێ
+   HEZHA AUTHENTICATION & OTP SYSTEM (FULLY COMPATIBLE)
    ======================================================== */
 
-// زانیارییەکانی پڕۆژەی فایربەیس لێرە دادەنرێت
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY_HERE",
   authDomain: "hezha-store.firebaseapp.com",
@@ -13,11 +11,14 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
-// ئەگەر فایربەیس کۆنفیگ کرابوو، دەستپێدەکات
 let isFirebaseConfigured = false;
-if (firebaseConfig.apiKey !== "YOUR_API_KEY_HERE") {
-  firebase.initializeApp(firebaseConfig);
-  isFirebaseConfigured = true;
+if (typeof firebase !== 'undefined' && firebaseConfig.apiKey !== "YOUR_API_KEY_HERE") {
+  try {
+    firebase.initializeApp(firebaseConfig);
+    isFirebaseConfigured = true;
+  } catch (e) {
+    console.warn("Firebase Init Skipped:", e);
+  }
 }
 
 let currentAuthMode = 'phone';
@@ -33,24 +34,28 @@ function setAuthMode(mode) {
   const gmailGroup = document.getElementById('gmailInputGroup');
 
   if (mode === 'phone') {
-    phoneBtn.classList.add('active');
-    gmailBtn.classList.remove('active');
-    phoneGroup.style.display = 'block';
-    gmailGroup.style.display = 'none';
+    if (phoneBtn) phoneBtn.classList.add('active');
+    if (gmailBtn) gmailBtn.classList.remove('active');
+    if (phoneGroup) phoneGroup.style.display = 'block';
+    if (gmailGroup) gmailGroup.style.display = 'none';
   } else {
-    gmailBtn.classList.add('active');
-    phoneBtn.classList.remove('active');
-    gmailGroup.style.display = 'block';
-    phoneGroup.style.display = 'none';
+    if (gmailBtn) gmailBtn.classList.add('active');
+    if (phoneBtn) phoneBtn.classList.remove('active');
+    if (gmailGroup) gmailGroup.style.display = 'block';
+    if (phoneGroup) phoneGroup.style.display = 'none';
   }
 }
 
-// ناردنی کۆدی پشتڕاستکردنەوە
 function sendVerificationCode() {
-  const name = document.getElementById('regName').value.trim();
-  const phone = document.getElementById('regPhone').value.trim();
-  const gmail = document.getElementById('regGmail').value.trim();
-  const address = document.getElementById('regAddress').value.trim();
+  const nameEl = document.getElementById('regName');
+  const phoneEl = document.getElementById('regPhone');
+  const gmailEl = document.getElementById('regGmail');
+  const addrEl = document.getElementById('regAddress');
+
+  const name = nameEl ? nameEl.value.trim() : '';
+  const phone = phoneEl ? phoneEl.value.trim() : '';
+  const gmail = gmailEl ? gmailEl.value.trim() : '';
+  const address = addrEl ? addrEl.value.trim() : '';
 
   if (!name) { alert("تکایە ناڤێ خۆ بنڤیسە!"); return; }
   if (currentAuthMode === 'phone' && !phone) { alert("تکایە ژمارا مۆبایلێ بنڤیسە!"); return; }
@@ -60,48 +65,58 @@ function sendVerificationCode() {
   tempUser = { name, type: currentAuthMode, contact: target, address: address || 'دهۆک' };
 
   if (isFirebaseConfigured && currentAuthMode === 'phone') {
-    // سیستەمی SMS OTPی فایربەیس
-    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
-    firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
-      .then((result) => {
-        confirmationResult = result;
-        showOtpStep(target);
-      }).catch((error) => {
-        alert("هەڵە ڕوویدا لە ناردنی کۆد: " + error.message);
-      });
+    try {
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', { 'size': 'invisible' });
+      firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
+        .then((result) => {
+          confirmationResult = result;
+          showOtpStep(target);
+        }).catch((error) => {
+          alert("هەڵە ڕوویدا لە فایربەیس: " + error.message);
+        });
+    } catch (err) {
+      fallbackOtp(target);
+    }
   } else {
-    // سیستەمی لۆکاڵ کاتێک فایربەیس بەستراو نەبێت
-    generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
-    showOtpStep(target);
-    alert(`[HEZHA Security] کۆدێ پشتڕاستکرنێ: ${generatedOtp}`);
+    fallbackOtp(target);
   }
+}
+
+function fallbackOtp(target) {
+  generatedOtp = Math.floor(1000 + Math.random() * 9000).toString();
+  showOtpStep(target);
+  alert(`[HEZHA Security] کۆدێ پشتڕاستکرنێ: ${generatedOtp}`);
 }
 
 function showOtpStep(target) {
-  document.getElementById('userAuthStep1').style.display = 'none';
-  document.getElementById('userAuthStep2').style.display = 'block';
-  document.getElementById('verifyTargetText').innerText = `کۆد بۆ (${target}) هاتە ڕەوانەکرن`;
+  const step1 = document.getElementById('userAuthStep1');
+  const step2 = document.getElementById('userAuthStep2');
+  const targetText = document.getElementById('verifyTargetText');
+
+  if (step1) step1.style.display = 'none';
+  if (step2) step2.style.display = 'block';
+  if (targetText) targetText.innerText = `کۆد بۆ (${target}) هاتە ڕەوانەکرن`;
 }
 
 function movePin(current, nextId) {
-  if (current.value.length >= 1 && nextId) {
-    document.getElementById(nextId).focus();
+  if (current && current.value.length >= 1 && nextId) {
+    const nextEl = document.getElementById(nextId);
+    if (nextEl) nextEl.focus();
   }
 }
 
-// پشتڕاستکردنەوەی کۆدەکە
 function verifyAndActivateAccount() {
-  const p1 = document.getElementById('pin1').value;
-  const p2 = document.getElementById('pin2').value;
-  const p3 = document.getElementById('pin3').value;
-  const p4 = document.getElementById('pin4').value;
+  const p1 = document.getElementById('pin1')?.value || '';
+  const p2 = document.getElementById('pin2')?.value || '';
+  const p3 = document.getElementById('pin3')?.value || '';
+  const p4 = document.getElementById('pin4')?.value || '';
   const enteredCode = p1 + p2 + p3 + p4;
 
   if (confirmationResult) {
-    confirmationResult.confirm(enteredCode).then((result) => {
+    confirmationResult.confirm(enteredCode).then(() => {
       completeActivation();
     }).catch(() => {
-      alert("کۆدی فایربەیس هەڵەیە!");
+      alert("کۆدی پشتڕاستکردنەوە هەڵەیە!");
     });
   } else {
     if (enteredCode === generatedOtp) {
@@ -114,14 +129,17 @@ function verifyAndActivateAccount() {
 
 function completeActivation() {
   localStorage.setItem('hezha_account', JSON.stringify(tempUser));
-  document.getElementById('userAuthStep2').style.display = 'none';
+  const step2 = document.getElementById('userAuthStep2');
+  if (step2) step2.style.display = 'none';
   checkAuthStatus();
-  alert(`پیرۆزە ${tempUser.name} گیان! هەژمارا تە هاتە پشتڕاستکرن و دروستکرن ♡`);
+  alert(`پیرۆزە ${tempUser.name} گیان! هەژمارا تە هاتە دروستکرن ♡`);
 }
 
 function backToStep1() {
-  document.getElementById('userAuthStep2').style.display = 'none';
-  document.getElementById('userAuthStep1').style.display = 'block';
+  const step1 = document.getElementById('userAuthStep1');
+  const step2 = document.getElementById('userAuthStep2');
+  if (step2) step2.style.display = 'none';
+  if (step1) step1.style.display = 'block';
 }
 
 function checkAuthStatus() {
@@ -130,20 +148,25 @@ function checkAuthStatus() {
   const authStep1 = document.getElementById('userAuthStep1');
   const authStep2 = document.getElementById('userAuthStep2');
 
-  if (stored) {
+  if (stored && loggedView) {
     const user = JSON.parse(stored);
     loggedView.style.display = 'block';
-    authStep1.style.display = 'none';
-    authStep2.style.display = 'none';
+    if (authStep1) authStep1.style.display = 'none';
+    if (authStep2) authStep2.style.display = 'none';
 
-    document.getElementById('dispName').innerText = user.name;
-    document.getElementById('dispAccountType').innerText = (user.type === 'phone' ? '📱 مۆبایل: ' : '✉️ Gmail: ') + user.contact;
-    document.getElementById('dispAddress').innerText = '📍 ناڤونیشان: ' + user.address;
-    document.getElementById('editAddress').value = user.address;
-  } else {
+    const dispName = document.getElementById('dispName');
+    const dispAccountType = document.getElementById('dispAccountType');
+    const dispAddress = document.getElementById('dispAddress');
+    const editAddress = document.getElementById('editAddress');
+
+    if (dispName) dispName.innerText = user.name;
+    if (dispAccountType) dispAccountType.innerText = (user.type === 'phone' ? '📱: ' : '✉️: ') + user.contact;
+    if (dispAddress) dispAddress.innerText = '📍 ' + user.address;
+    if (editAddress) editAddress.value = user.address;
+  } else if (loggedView) {
     loggedView.style.display = 'none';
-    authStep1.style.display = 'block';
-    authStep2.style.display = 'none';
+    if (authStep1) authStep1.style.display = 'block';
+    if (authStep2) authStep2.style.display = 'none';
   }
 }
 
@@ -151,7 +174,8 @@ function updateSavedAddress() {
   const stored = localStorage.getItem('hezha_account');
   if (stored) {
     let user = JSON.parse(stored);
-    user.address = document.getElementById('editAddress').value.trim() || user.address;
+    const editAddress = document.getElementById('editAddress');
+    user.address = (editAddress && editAddress.value.trim()) || user.address;
     localStorage.setItem('hezha_account', JSON.stringify(user));
     checkAuthStatus();
     alert("ناڤونیشان ب سەرکەفتی هاتە گوهۆڕین ✨");
@@ -162,5 +186,4 @@ function logoutUser() {
   localStorage.removeItem('hezha_account');
   checkAuthStatus();
   alert("تۆ ژ هەژمارا خۆ دەرکەفتی.");
-                                      }
-
+}
