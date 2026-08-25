@@ -15,10 +15,11 @@
 </head>
 <body>
 
+  <!-- Top Strip with Language Switcher -->
   <div class="top-strip">
-    <span>🌐 Kur | Eng</span>
-    <span>♡ Handmade with love · HEZHA</span>
-    <span>✨ کرۆشێیا تایبەت</span>
+    <span onclick="cycleLanguage()" style="cursor:pointer; font-weight:800; background:rgba(255,255,255,0.4); padding:2px 8px; border-radius:12px;" id="langBtn">🌐 کوردی</span>
+    <span id="topMiddle">♡ Handmade with love · HEZHA</span>
+    <span id="topBadge">✨ کرۆشێیا تایبەت</span>
   </div>
 
   <header>
@@ -71,14 +72,14 @@
         <h1 class="hero-title">HEZHA</h1>
         <div class="hero-sub">Little things. Big feelings. ♡</div>
         
-        <div class="hero-kurdish">
+        <div class="hero-kurdish" id="heroText">
           هندەک تشت دهێنە چێکرن...<br>
           هندەک تشت دهێنە هەستپێکرن. ♡
         </div>
 
         <div class="hero-btn-row">
-          <button class="btn-pink" onclick="filterByCategory('all')">Shop Now ♡ →</button>
-          <button class="btn-white" onclick="switchNav('custom')">Make It Personal ✨</button>
+          <button class="btn-pink" id="heroShopBtn" onclick="filterByCategory('all')">Shop Now ♡ →</button>
+          <button class="btn-white" id="heroCustomBtn" onclick="switchNav('custom')">Make It Personal ✨</button>
         </div>
       </div>
     </section>
@@ -86,46 +87,46 @@
     <!-- Badges -->
     <div class="features-scroll">
       <div class="feat-pill" onclick="switchNav('delivery')">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-        گەهاندنا دهۆکێ 🚚
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        <span id="featDelivery">گەهاندنا دهۆکێ 🚚</span>
       </div>
       <div class="feat-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
-        پێچانا دیاریێ
+        <span id="featGift">پێچانا دیاریێ</span>
       </div>
       <div class="feat-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-        ب کوالێتییا بلند
+        <span id="featQuality">ب کوالێتییا بلند</span>
       </div>
     </div>
 
     <!-- Collections -->
     <div class="sec-block">
       <div class="sec-header">
-        <h3 class="sec-title">بەشێن ئیشێن دەستچن ♡</h3>
-        <span class="sec-tag" onclick="filterByCategory('all')">هەمییان ببینە →</span>
+        <h3 class="sec-title" id="secCatTitle">بەشێن ئیشێن دەستچن ♡</h3>
+        <span class="sec-tag" id="secSeeAll" onclick="filterByCategory('all')">هەمییان ببینە →</span>
       </div>
 
       <div class="cards-scroll-wrap">
         <div class="col-card-m" onclick="filterByCategory('مەدالی')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80');"></div>
-          <h4>مەدالی</h4>
-          <p>مەدالیێن نازدار</p>
+          <h4 id="catCard1">مەدالی</h4>
+          <p id="catCardSub1">مەدالیێن نازدار</p>
         </div>
         <div class="col-card-m" onclick="filterByCategory('ملپێچ')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?auto=format&fit=crop&w=400&q=80');"></div>
-          <h4>ملپێچ</h4>
-          <p>ملپێچێن گەرم</p>
+          <h4 id="catCard2">ملپێچ</h4>
+          <p id="catCardSub2">ملپێچێن گەرم</p>
         </div>
         <div class="col-card-m" onclick="filterByCategory('کلاو')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=400&q=80');"></div>
-          <h4>کلاو</h4>
-          <p>کلاوێن کرۆشێ</p>
+          <h4 id="catCard3">کلاو</h4>
+          <p id="catCardSub3">کلاوێن کرۆشێ</p>
         </div>
         <div class="col-card-m" onclick="filterByCategory('جلوبەرگ')">
           <div class="col-img-m" style="background-image:url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=400&q=80');"></div>
-          <h4>جل و بەرگ</h4>
-          <p>جلوبەرگێن دەستچن</p>
+          <h4 id="catCard4">جل و بەرگ</h4>
+          <p id="catCardSub4">جلوبەرگێن دەستچن</p>
         </div>
       </div>
     </div>
@@ -134,18 +135,18 @@
     <div class="sec-block">
       <div class="sec-header">
         <h3 class="sec-title">Bestsellers ♡</h3>
-        <span class="sec-tag" onclick="filterByCategory('all')">پترترین داخوازی کری</span>
+        <span class="sec-tag" id="secBestTag" onclick="filterByCategory('all')">پترترین داخوازی کری</span>
       </div>
 
       <div class="product-grid-m">
         <div class="prod-card-m">
           <div class="prod-heart" onclick="toggleWishlist('Cute Medali', 15, 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80')">♡</div>
-          <span class="badge-hot-m">🔥 پڕفرۆش</span>
+          <span class="badge-hot-m" id="badgeHotText">🔥 پڕفرۆش</span>
           <div class="prod-img-m" style="background-image:url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=400&q=80');"></div>
           <div class="prod-title-m">Cute Medali</div>
           <div class="stars-m">★★★★★ (124)</div>
           <div class="price-m">$15</div>
-          <button class="btn-buy-m" onclick="quickAdd('Cute Medali', 15)">زێدەکرن بۆ سەبەتێ</button>
+          <button class="btn-buy-m add-cart-btn" onclick="quickAdd('Cute Medali', 15)">زێدەکرن بۆ سەبەتێ</button>
         </div>
 
         <div class="prod-card-m">
@@ -154,17 +155,17 @@
           <div class="prod-title-m">Warm Scarf</div>
           <div class="stars-m">★★★★★ (98)</div>
           <div class="price-m">$25</div>
-          <button class="btn-buy-m" onclick="quickAdd('Warm Scarf', 25)">زێدەکرن بۆ سەبەتێ</button>
+          <button class="btn-buy-m add-cart-btn" onclick="quickAdd('Warm Scarf', 25)">زێدەکرن بۆ سەبەتێ</button>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- 2. SHOP TAB (لێرەدا شریتی بەشەکان زیادکرایەوە) -->
+  <!-- 2. SHOP TAB -->
   <main id="tab-shop" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title" id="shopTitle">هەمی بەرهەمێن دەستچن 🌸</h3>
-      <span class="sec-tag" onclick="switchNav('home')">← سەرەکی</span>
+      <span class="sec-tag" id="shopBackHome" onclick="switchNav('home')">← سەرەکی</span>
     </div>
 
     <!-- دوگمەکانی فیلتەرکردن -->
@@ -182,10 +183,10 @@
   <!-- 3. SEARCH TAB -->
   <main id="tab-search" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">لێگەڕیان 🔍</h3>
+      <h3 class="sec-title" id="searchTitle">لێگەڕیان 🔍</h3>
     </div>
     <div class="field-group">
-      <input type="text" placeholder="ناڤێ بەرهەمی بنڤیسە..." oninput="filterSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="ناڤێ بەرهەمی بنڤیسە..." oninput="filterSearch(this.value)">
     </div>
     <div id="searchBoxResult" style="text-align:center; color:var(--muted); padding:20px;">
       ل چ بەرهەمەکێ دگەڕیی؟
@@ -195,8 +196,8 @@
   <!-- 4. WISHLIST TAB -->
   <main id="tab-wishlist" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">حەزژێکریێن من ♡</h3>
-      <span class="sec-tag" onclick="filterByCategory('all')">کڕین</span>
+      <h3 class="sec-title" id="wishTitle">حەزژێکریێن من ♡</h3>
+      <span class="sec-tag" id="wishShopTag" onclick="filterByCategory('all')">کڕین</span>
     </div>
     <div class="custom-input-box" id="wishlistContentBox"></div>
   </main>
@@ -204,13 +205,13 @@
   <!-- 5. DUHOK DELIVERY CALCULATOR -->
   <main id="tab-delivery" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">گەهاندنا دهۆکێ و دەوروبەر 🚚</h3>
-      <span class="sec-tag" onclick="switchNav('home')">← سەرەکی</span>
+      <h3 class="sec-title" id="delivTitle">گەهاندنا دهۆکێ و دەوروبەر 🚚</h3>
+      <span class="sec-tag" id="delivBackHome" onclick="switchNav('home')">← سەرەکی</span>
     </div>
     
     <div class="custom-input-box">
       <div class="field-group">
-        <label>جهێ گەهاندنێ هەلبژێرە:</label>
+        <label id="delivSelectLabel">جهێ گەهاندنێ هەلبژێرە:</label>
         <select id="deliveryLocation">
           <option value="3000">ناڤەندا باژێڕێ دهۆکێ (3,000 دینار)</option>
           <option value="4000">ماسیکێ / شۆڕش / مالتا (4,000 دینار)</option>
@@ -218,32 +219,32 @@
           <option value="6000">هەولێر / سلێمانی (6,000 دینار)</option>
         </select>
       </div>
-      <button class="btn-pink" style="width:100%;" onclick="filterByCategory('all')">دەستپێکرنا کڕینێ 🛍️</button>
+      <button class="btn-pink" id="delivStartBtn" style="width:100%;" onclick="filterByCategory('all')">دەستپێکرنا کڕینێ 🛍️</button>
     </div>
   </main>
 
   <!-- 6. CUSTOM STUDIO TAB -->
   <main id="tab-custom" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">داخوازیا تایبەت ✨</h3>
+      <h3 class="sec-title" id="customTitle">داخوازیا تایبەت ✨</h3>
     </div>
     <div class="custom-input-box">
       <div class="field-group">
-        <label>جۆرێ دەستچنی:</label>
+        <label id="customItemLabel">جۆرێ دەستچنی:</label>
         <select id="custItem"><option>مەدالییا نازدار</option><option>ملپێچێ گەرم</option><option>کلاوێ کرۆشێ</option><option>جلوبەرگێ دەستچن</option></select>
       </div>
       <div class="field-group">
-        <label>نامەیا کارتێ:</label>
+        <label id="customMsgLabel">نامەیا کارتێ:</label>
         <textarea id="custMsg" rows="3" placeholder="نامەیەکا جوان بنڤیسە..."></textarea>
       </div>
-      <button class="btn-pink" style="width:100%;" onclick="orderWhatsAppCustom()">فرێکرن ب WhatsApp 💬</button>
+      <button class="btn-pink" id="customSendBtn" style="width:100%;" onclick="orderWhatsAppCustom()">فرێکرن ب WhatsApp 💬</button>
     </div>
   </main>
 
   <!-- 7. CART TAB -->
   <main id="tab-cart" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">سەبەتا تە 🛍️</h3>
+      <h3 class="sec-title" id="cartTitle">سەبەتا تە 🛍️</h3>
     </div>
     <div class="custom-input-box" id="cartContentBox"></div>
   </main>
@@ -251,7 +252,7 @@
   <!-- 8. PROFILE TAB -->
   <main id="tab-profile" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
-      <h3 class="sec-title">پرۆفایل و هەژمار 👤</h3>
+      <h3 class="sec-title" id="profileTitle">پرۆفایل و هەژمار 👤</h3>
     </div>
 
     <div id="userLoggedInView" style="display:none;">
@@ -259,24 +260,24 @@
         <div style="width:64px; height:64px; border-radius:50%; background:var(--soft-pink); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:24px;">🌸</div>
         <h4 id="dispName" style="font-size:15px; font-weight:800; color:var(--dark-text);">ناڤێ کڕیاری</h4>
         <p id="dispAccountType" style="color:var(--deep-berry); font-size:10.5px; font-weight:700; margin-top:2px;">Gmail / Phone</p>
-        <p style="color:#2E7D32; font-size:10px; font-weight:700; margin-top:3px;">✓ پشتڕاستکرییە (Verified)</p>
+        <p style="color:#2E7D32; font-size:10px; font-weight:700; margin-top:3px;">✓ Verified</p>
         <p id="dispAddress" style="color:var(--muted); font-size:11px; margin-top:4px;">ناڤونیشان</p>
       </div>
 
       <div class="custom-input-box">
-        <h4 style="font-size:12px; font-weight:700; margin-bottom:12px; color:var(--deep-berry);">دەستکاریکرنا ناڤونیشانی</h4>
+        <h4 style="font-size:12px; font-weight:700; margin-bottom:12px; color:var(--deep-berry);" id="editAddrHeading">دەستکاریکرنا ناڤونیشانی</h4>
         <div class="field-group">
-          <label>باژێڕ و ناڤونیشان:</label>
+          <label id="editAddrLabel">باژێڕ و ناڤونیشان:</label>
           <input type="text" id="editAddress" placeholder="دهۆک، تاخێ...">
         </div>
-        <button class="btn-pink" style="width:100%; margin-bottom:8px;" onclick="updateSavedAddress()">نویکرنا ناڤونیشانی</button>
-        <button class="btn-white" style="width:100%;" onclick="logoutUser()">دەرکەفتن ژ هەژمارێ (Logout)</button>
+        <button class="btn-pink" id="updateAddrBtn" style="width:100%; margin-bottom:8px;" onclick="updateSavedAddress()">نویکرنا ناڤونیشانی</button>
+        <button class="btn-white" id="logoutBtn" style="width:100%;" onclick="logoutUser()">دەرکەفتن ژ هەژمارێ (Logout)</button>
       </div>
     </div>
 
     <div id="userAuthStep1">
       <div class="custom-input-box">
-        <h4 style="font-size:13px; font-weight:800; text-align:center; margin-bottom:14px; color:var(--dark-text);">دروستکرنا هەژمارێ ✨</h4>
+        <h4 style="font-size:13px; font-weight:800; text-align:center; margin-bottom:14px; color:var(--dark-text);" id="createAccTitle">دروستکرنا هەژمارێ ✨</h4>
 
         <div class="auth-toggle-row">
           <button id="togglePhoneBtn" class="auth-toggle-btn active" onclick="setAuthMode('phone')">ب ژمارا مۆبایلێ 📱</button>
@@ -284,34 +285,34 @@
         </div>
 
         <div class="field-group">
-          <label>ناڤێ تە یێ سیانی:</label>
+          <label id="nameLabel">ناڤێ تە یێ سیانی:</label>
           <input type="text" id="regName" placeholder="ناڤێ خۆ بنڤیسە...">
         </div>
 
         <div class="field-group" id="phoneInputGroup">
-          <label>ژمارا مۆبایلێ (WhatsApp):</label>
+          <label id="phoneLabel">ژمارا مۆبایلێ (WhatsApp):</label>
           <input type="tel" id="regPhone" placeholder="+964750XXXXXXX">
         </div>
 
         <div class="field-group" id="gmailInputGroup" style="display:none;">
-          <label>ئیمەیڵ (Gmail):</label>
+          <label id="gmailLabel">ئیمەیڵ (Gmail):</label>
           <input type="email" id="regGmail" placeholder="example@gmail.com">
         </div>
 
         <div class="field-group">
-          <label>باژێڕ و ناڤونیشان:</label>
+          <label id="addressLabel">باژێڕ و ناڤونیشان:</label>
           <input type="text" id="regAddress" placeholder="دهۆک، تاخێ...">
         </div>
 
         <div id="recaptcha-container"></div>
 
-        <button class="btn-pink" style="width:100%; margin-top:8px;" onclick="sendVerificationCode()">ناردنا کۆدێ پشتڕاستکرنێ 📩</button>
+        <button class="btn-pink" id="sendCodeBtn" style="width:100%; margin-top:8px;" onclick="sendVerificationCode()">ناردنا کۆدێ پشتڕاستکرنێ 📩</button>
       </div>
     </div>
 
     <div id="userAuthStep2" style="display:none;">
       <div class="custom-input-box" style="text-align:center;">
-        <h4 style="font-size:14px; font-weight:800; color:var(--dark-text); margin-bottom:4px;">کۆدێ پشتڕاستکرنێ بنڤیسە 🔐</h4>
+        <h4 style="font-size:14px; font-weight:800; color:var(--dark-text); margin-bottom:4px;" id="verifyCodeTitle">کۆدێ پشتڕاستکرنێ بنڤیسە 🔐</h4>
         <p id="verifyTargetText" style="color:var(--muted); font-size:11px; margin-bottom:12px;"></p>
 
         <div class="pin-input-group">
@@ -321,37 +322,37 @@
           <input type="number" id="pin4" class="pin-digit" maxlength="1">
         </div>
 
-        <button class="btn-pink" style="width:100%; margin-top:10px;" onclick="verifyAndActivateAccount()">پشتڕاستکرن ✓</button>
-        <button class="btn-white" style="width:100%; margin-top:8px;" onclick="backToStep1()">← زڤڕین</button>
+        <button class="btn-pink" id="confirmCodeBtn" style="width:100%; margin-top:10px;" onclick="verifyAndActivateAccount()">پشتڕاستکرن ✓</button>
+        <button class="btn-white" id="backBtn" style="width:100%; margin-top:8px;" onclick="backToStep1()">← زڤڕین</button>
       </div>
     </div>
   </main>
 
-  <!-- بەشی دوگمەکانی خوارەوە (Dock) -->
+  <!-- Dock Navigation -->
   <nav class="dock-m">
     <div class="dock-link active" id="nav-home" onclick="switchNav('home')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-      <span>سەرەکی</span>
+      <span id="navTextHome">سەرەکی</span>
     </div>
 
     <div class="dock-link" id="nav-shop" onclick="filterByCategory('all')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-      <span>فرۆشگەهـ</span>
+      <span id="navTextShop">فرۆشگەهـ</span>
     </div>
 
     <div class="dock-link" id="nav-search" onclick="switchNav('search')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <span>لێگەڕیان</span>
+      <span id="navTextSearch">لێگەڕیان</span>
     </div>
 
     <div class="dock-link" id="nav-wishlist" onclick="switchNav('wishlist')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-      <span>حەزژێکری</span>
+      <span id="navTextWish">حەزژێکری</span>
     </div>
 
     <div class="dock-link" id="nav-profile" onclick="switchNav('profile')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      <span>پرۆفایل</span>
+      <span id="navTextProfile">پرۆفایل</span>
     </div>
   </nav>
 
