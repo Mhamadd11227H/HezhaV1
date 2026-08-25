@@ -48,7 +48,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
         </svg>
-        <span class="badge-dot" id="topWishCount">3</span>
+        <span class="badge-dot" id="topWishCount">1</span>
       </div>
 
       <div class="icon-btn" onclick="switchNav('cart')">
@@ -77,7 +77,7 @@
         </div>
 
         <div class="hero-btn-row">
-          <button class="btn-pink" onclick="switchNav('shop')">Shop Now ♡ →</button>
+          <button class="btn-pink" onclick="filterByCategory('all')">Shop Now ♡ →</button>
           <button class="btn-white" onclick="switchNav('custom')">Make It Personal ✨</button>
         </div>
       </div>
@@ -99,7 +99,7 @@
       </div>
     </div>
 
-    <!-- Collections (بەشەکان بە وێنەی ڕاستەقینە و کارا) -->
+    <!-- Collections -->
     <div class="sec-block">
       <div class="sec-header">
         <h3 class="sec-title">بەشێن ئیشێن دەستچن ♡</h3>
@@ -134,7 +134,7 @@
     <div class="sec-block">
       <div class="sec-header">
         <h3 class="sec-title">Bestsellers ♡</h3>
-        <span class="sec-tag">پترترین داخوازی کری</span>
+        <span class="sec-tag" onclick="filterByCategory('all')">پترترین داخوازی کری</span>
       </div>
 
       <div class="product-grid-m">
@@ -160,11 +160,20 @@
     </div>
   </main>
 
-  <!-- 2. SHOP TAB -->
+  <!-- 2. SHOP TAB (لێرەدا شریتی بەشەکان زیادکرایەوە) -->
   <main id="tab-shop" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title" id="shopTitle">هەمی بەرهەمێن دەستچن 🌸</h3>
       <span class="sec-tag" onclick="switchNav('home')">← سەرەکی</span>
+    </div>
+
+    <!-- دوگمەکانی فیلتەرکردن -->
+    <div class="cat-pill-bar">
+      <button class="cat-btn active" id="btn-cat-all" onclick="filterByCategory('all')">هەمی</button>
+      <button class="cat-btn" id="btn-cat-مەدالی" onclick="filterByCategory('مەدالی')">مەدالی 🎀</button>
+      <button class="cat-btn" id="btn-cat-ملپێچ" onclick="filterByCategory('ملپێچ')">ملپێچ 🧣</button>
+      <button class="cat-btn" id="btn-cat-کلاو" onclick="filterByCategory('کلاو')">کلاو 🧶</button>
+      <button class="cat-btn" id="btn-cat-جلوبەرگ" onclick="filterByCategory('جلوبەرگ')">جل و بەرگ 👗</button>
     </div>
 
     <div class="product-grid-m" id="shopProductGrid"></div>
@@ -187,7 +196,7 @@
   <main id="tab-wishlist" class="tab-view sec-block">
     <div class="sec-header" style="margin-top:10px;">
       <h3 class="sec-title">حەزژێکریێن من ♡</h3>
-      <span class="sec-tag" onclick="switchNav('shop')">کڕین</span>
+      <span class="sec-tag" onclick="filterByCategory('all')">کڕین</span>
     </div>
     <div class="custom-input-box" id="wishlistContentBox"></div>
   </main>
@@ -209,7 +218,7 @@
           <option value="6000">هەولێر / سلێمانی (6,000 دینار)</option>
         </select>
       </div>
-      <button class="btn-pink" style="width:100%;" onclick="switchNav('shop')">دەستپێکرنا کڕینێ 🛍️</button>
+      <button class="btn-pink" style="width:100%;" onclick="filterByCategory('all')">دەستپێکرنا کڕینێ 🛍️</button>
     </div>
   </main>
 
@@ -318,13 +327,14 @@
     </div>
   </main>
 
+  <!-- بەشی دوگمەکانی خوارەوە (Dock) -->
   <nav class="dock-m">
     <div class="dock-link active" id="nav-home" onclick="switchNav('home')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
       <span>سەرەکی</span>
     </div>
 
-    <div class="dock-link" id="nav-shop" onclick="switchNav('shop')">
+    <div class="dock-link" id="nav-shop" onclick="filterByCategory('all')">
       <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
       <span>فرۆشگەهـ</span>
     </div>
